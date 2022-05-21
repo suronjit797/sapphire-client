@@ -41,10 +41,15 @@ const RequireAuth = ({ children }) => {
     // }, [location])
 
     // loading spinner
-    if (loading) {
-        return <Spinner animation="border" variant="primary" />
-    }
-
+    useEffect(() => {
+        if (loading) {
+            return (
+                <div className='center'>
+                    <Spinner animation="border" variant="primary" />
+                </div>
+            )
+        }
+    }, [loading])
 
 
     if (!user) {

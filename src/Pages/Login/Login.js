@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect } from 'react';
 import { Link, useLocation, useNavigate } from 'react-router-dom'
 import SocialSignIn from '../Components/SocialSignIn/SocialSignIn';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
@@ -10,6 +10,7 @@ import './Login.css'
 import auth from '../../firebase.init';
 import { useSignInWithEmailAndPassword } from 'react-firebase-hooks/auth';
 import FirebaseErrorMsg from '../Components/firebaseErrorMsg';
+import { Spinner } from 'react-bootstrap';
 
 const Login = () => {
     const navigate = useNavigate()
@@ -24,20 +25,33 @@ const Login = () => {
         error,
     ] = useSignInWithEmailAndPassword(auth);
 
-
+// if error
     useEffect(() => {
         if (error) {
             FirebaseErrorMsg(error.message)
         }
     }, [error])
+
+    // if user
     useEffect(() => {
         if (user) {
             navigate(form)
         }
     }, [user, navigate, form])
 
+    // if loading
+        useEffect(() => {
+            if (loading ) {
+                return (
+                    <div className='center'>
+                        <Spinner animation="border" variant="primary" />
+                    </div>
+                )
+            }
+        }, [loading])
+
     // react hooks form
-    const { register, handleSubmit, watch, formState: { errors } } = useForm();
+    const { register, handleSubmit, formState: { errors } } = useForm();
     const onSubmit = data => {
         const { email, password } = data
         signInWithEmailAndPassword(email, password)

@@ -9,6 +9,7 @@ import { useCreateUserWithEmailAndPassword, useUpdateProfile } from 'react-fireb
 import auth from '../../firebase.init';
 import { useEffect } from 'react';
 import firebaseErrorMsg from '../Components/firebaseErrorMsg'
+import { Spinner } from 'react-bootstrap';
 
 
 const Register = () => {
@@ -28,19 +29,31 @@ const Register = () => {
 
     const [updateProfile, updating, updateError] = useUpdateProfile(auth);
 
+    // if error
     useEffect(() => {
-        if (error) {
-            console.log(error.message);
+        if (error || updateError) {
+            console.log(error.message || updateError);
             firebaseErrorMsg(error.message)
         }
-    }, [error])
+    }, [error, updateError])
+
+    // if user
     useEffect(() => {
         if (user) {
             navigate(form)
         }
     }, [user, navigate, form])
 
-
+    // loading
+    useEffect(() => {
+        if (loading || updating) {
+            return (
+                <div className='center'>
+                    <Spinner animation="border" variant="primary" />
+                </div>
+            )
+        }
+    }, [loading, updating])
 
 
 
