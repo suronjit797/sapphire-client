@@ -2,7 +2,7 @@ import React from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faGoogle, faFacebookF, faGithub, faLinkedin } from '@fortawesome/free-brands-svg-icons'
 
-const SocialSinginMobile = () => {
+const SocialSignInMobile = () => {
     return (
         <div className='d-block d-md-none'>
             <div className="social">
@@ -15,4 +15,4 @@ const SocialSinginMobile = () => {
     );
 };
 
-export default SocialSinginMobile;
+export default SocialSignInMobile;

@@ -1,0 +1,10 @@
+img{
+    max-width: 100%;
+}
+a, a:hover{
+    text-decoration: none;
+}
+
+.cursor-pointer{
+    cursor: pointer;
+}

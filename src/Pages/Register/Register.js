@@ -3,7 +3,7 @@ import SocialSignIn from '../Components/SocialSignIn/SocialSignIn';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faEnvelope, faLock, faUser } from '@fortawesome/free-solid-svg-icons'
 import { useForm } from "react-hook-form";
-import SocialSinginMobile from '../Components/SocialSignIn/SocialSinginMobile';
+import SocialSignInMobile from '../Components/SocialSignIn/SocialSignInMobile';
 const Register = () => {
 
 
@@ -85,7 +85,7 @@ const Register = () => {
 
                             <p className='mt-3'> Already have an account? <Link to='/login'> Login Now </Link> </p>
 
-                            <SocialSinginMobile />
+                            <SocialSignInMobile />
                         </div>
                     </div>
                 </div>
