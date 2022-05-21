@@ -1,5 +1,5 @@
-import React, { useState } from 'react';
-import { Link } from 'react-router-dom'
+import React, { useEffect, useState } from 'react';
+import { Link, useLocation, useNavigate } from 'react-router-dom'
 import SocialSignIn from '../Components/SocialSignIn/SocialSignIn';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faEnvelope, faLock } from '@fortawesome/free-solid-svg-icons'
@@ -7,11 +7,41 @@ import { useForm } from "react-hook-form";
 import SocialSignInMobile from '../Components/SocialSignIn/SocialSignInMobile';
 
 import './Login.css'
+import auth from '../../firebase.init';
+import { useSignInWithEmailAndPassword } from 'react-firebase-hooks/auth';
+import FirebaseErrorMsg from '../Components/firebaseErrorMsg';
 
 const Login = () => {
+    const navigate = useNavigate()
+    const location = useLocation()
+    let form = location?.state?.from?.pathname || "/";
 
+    // firebase hooks
+    const [
+        signInWithEmailAndPassword,
+        user,
+        loading,
+        error,
+    ] = useSignInWithEmailAndPassword(auth);
+
+
+    useEffect(() => {
+        if (error) {
+            FirebaseErrorMsg(error.message)
+        }
+    }, [error])
+    useEffect(() => {
+        if (user) {
+            navigate(form)
+        }
+    }, [user, navigate, form])
+
+    // react hooks form
     const { register, handleSubmit, watch, formState: { errors } } = useForm();
-    const onSubmit = data => console.log(data);
+    const onSubmit = data => {
+        const { email, password } = data
+        signInWithEmailAndPassword(email, password)
+    };
 
     const handleReset = () => {
 

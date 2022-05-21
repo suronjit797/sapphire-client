@@ -1,15 +1,64 @@
-import { Link } from 'react-router-dom'
+import { Link, useLocation, useNavigate } from 'react-router-dom'
+import Swal from 'sweetalert2'
 import SocialSignIn from '../Components/SocialSignIn/SocialSignIn';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faEnvelope, faLock, faUser } from '@fortawesome/free-solid-svg-icons'
 import { useForm } from "react-hook-form";
 import SocialSignInMobile from '../Components/SocialSignIn/SocialSignInMobile';
+import { useCreateUserWithEmailAndPassword, useUpdateProfile } from 'react-firebase-hooks/auth';
+import auth from '../../firebase.init';
+import { useEffect } from 'react';
+import firebaseErrorMsg from '../Components/firebaseErrorMsg'
+
+
 const Register = () => {
+    const navigate = useNavigate()
+    const location = useLocation()
+    let form = location?.state?.from?.pathname || "/";
+    console.log(location);
 
 
-    const { register, handleSubmit, watch, formState: { errors } } = useForm();
-    const onSubmit = data => {
-        console.log(data);
+    // firebase hooks
+    const [
+        createUserWithEmailAndPassword,
+        user,
+        loading,
+        error,
+    ] = useCreateUserWithEmailAndPassword(auth);
+
+    const [updateProfile, updating, updateError] = useUpdateProfile(auth);
+
+    useEffect(() => {
+        if (error) {
+            console.log(error.message);
+            firebaseErrorMsg(error.message)
+        }
+    }, [error])
+    useEffect(() => {
+        if (user) {
+            navigate(form)
+        }
+    }, [user, navigate, form])
+
+
+
+
+
+
+
+    const { register, handleSubmit, formState: { errors } } = useForm();
+    const onSubmit = async (data) => {
+        const { name, email, password, confirmPassword } = data
+        if (password === confirmPassword) {
+            await createUserWithEmailAndPassword(email, password)
+            await updateProfile({ displayName: name })
+        } else {
+            Swal.fire({
+                icon: 'error',
+                title: 'Oops...',
+                text: "Password doesn't match",
+            })
+        }
     }
 
     const handleReset = () => {
@@ -55,8 +104,8 @@ const Register = () => {
                                         placeholder="Password"
                                     />
                                     <label htmlFor="password"> <FontAwesomeIcon icon={faLock} /> </label>
-                                    {errors?.password?.type==='required' && <p className='text-warning text-start'> Please provide password! </p>}
-                                    {errors?.password?.type==='minLength' && <p className='text-warning text-start'> Password must be at last 6 character! </p>}
+                                    {errors?.password?.type === 'required' && <p className='text-warning text-start'> Please provide password! </p>}
+                                    {errors?.password?.type === 'minLength' && <p className='text-warning text-start'> Password must be at last 6 character! </p>}
                                 </div>
                                 <div className="input">
                                     <input
@@ -66,8 +115,8 @@ const Register = () => {
                                         placeholder="Confirm Password"
                                     />
                                     <label htmlFor="confirmPassword"> <FontAwesomeIcon icon={faLock} /> </label>
-                                    {errors?.confirmPassword?.type==='required' && <p className='text-warning text-start'> Please provide password! </p>}
-                                    {errors?.confirmPassword?.type==='minLength' && <p className='text-warning text-start'> Password must be at last 6 character! </p>}
+                                    {errors?.confirmPassword?.type === 'required' && <p className='text-warning text-start'> Please provide password! </p>}
+                                    {errors?.confirmPassword?.type === 'minLength' && <p className='text-warning text-start'> Password must be at last 6 character! </p>}
                                 </div>
 
                                 <div className="d-block text-start d-sm-flex justify-content-between my-4">
