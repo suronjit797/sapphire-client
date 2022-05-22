@@ -1,0 +1,3 @@
+.carousel.slide img{
+    height: calc(100vh - 70px);
+}

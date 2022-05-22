@@ -1,7 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faFacebookF, faGithub, faGoogle, faLinkedin, faLinkedinIn } from '@fortawesome/free-brands-svg-icons'
+import { faFacebookF, faGithub, faGoogle, faLinkedinIn } from '@fortawesome/free-brands-svg-icons'
 import { signOut } from 'firebase/auth';
 import auth from '../../../firebase.init';
 
@@ -96,7 +96,7 @@ const Footer = () => {
                             <a href='/' className='social_icons faGoogle'> <FontAwesomeIcon icon={faGoogle} /></a>
                             <a href='/' className='social_icons faFacebookF'> <FontAwesomeIcon icon={faFacebookF} /></a>
                             <a href='/' className='social_icons faGithub'> <FontAwesomeIcon icon={faGithub} /></a>
-                            <a href='/' className='social_icons faLinkedin'> <FontAwesomeIcon icon={faLinkedin} /></a>
+                            <a href='/' className='social_icons faLinkedin'> <FontAwesomeIcon icon={faLinkedinIn} /></a>
                         </div>
                     </div>
                     <div className="col-md-6 my-2 text-center">

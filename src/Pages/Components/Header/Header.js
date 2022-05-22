@@ -19,10 +19,10 @@ const Header = () => {
 
     return (
         <div>
-            <Navbar bg="light" expand="lg">
+            <Navbar bg="dark" variant='dark' expand="lg">
                 <Container>
                     <Navbar.Brand as={Link} to="/">
-                        <h3 className='fw-bold'> SAPPHIRE </h3>
+                        <h3 className='fw-bold mb-0'> SAPPHIRE </h3>
                     </Navbar.Brand>
                     <Navbar.Toggle aria-controls="basic-navbar-nav" />
                     <Navbar.Collapse id="basic-navbar-nav">
