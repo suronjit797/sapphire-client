@@ -1,0 +1,22 @@
+.dashboard{
+    display: flex;
+
+}
+
+/* dashboard-left */
+.dashboard-left{
+    background-color: rebeccapurple;
+    width: 300px;
+    padding: 20px;
+}
+.dashboard-left a{
+    display: block;
+}
+
+
+
+/* dashboard-right */
+.dashboard-right{
+    background-color: rgba(13, 3, 24, 0.144);
+    width: 100%;
+}

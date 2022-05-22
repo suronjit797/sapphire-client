@@ -13,6 +13,12 @@ import Portfolio from './Pages/Portfolio/Portfolio';
 import RequireAuth from './Pages/Components/RequireAuth/RequireAuth';
 import Dashboard from './Pages/Dashboard/Dashboard';
 import Footer from './Pages/Components/Footer/Footer';
+import AddProduct from './Pages/Dashboard/AddProduct';
+import AddReview from './Pages/Dashboard/AddReview';
+import ManageOrders from './Pages/Dashboard/ManageOrders';
+import ManageProducts from './Pages/Dashboard/ManageProducts';
+import MyOrders from './Pages/Dashboard/MyOrders';
+import Profile from './Pages/Dashboard/Profile';
 
 function App() {
   return (
@@ -21,7 +27,14 @@ function App() {
       <Routes>
         <Route path='/' element={<Home />} />
         <Route path='/login' element={<Login />} />
-        <Route path='/dashboard' element={<Dashboard />} />
+        <Route path='/dashboard' element={<Dashboard />}> 
+          <Route index element={<MyOrders />} ></Route>
+          <Route path='add-review' element={<AddReview />} ></Route>
+          <Route path='my-profile' element={<Profile />} ></Route>
+          <Route path='manage-all-orders' element={ <ManageOrders /> } ></Route>
+          <Route path='add-product' element={<AddProduct />} ></Route>
+          <Route path='manage-products' element={ <ManageProducts />} ></Route>
+        </Route>
         <Route path='/blogs' element={<RequireAuth> <Blog /></RequireAuth>} />
         <Route path='/portfolio' element={<Portfolio />} />
         <Route path='/login' element={<Login />} />
