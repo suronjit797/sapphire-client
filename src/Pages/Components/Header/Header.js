@@ -33,6 +33,7 @@ const Header = () => {
                             {
                                 user ? (
                                     <>
+                                        <Nav.Link as={NavLink} to="/products">Products</Nav.Link>
                                         <Nav.Link as={NavLink} to="/dashboard">Dashboard</Nav.Link>
                                         <Nav onClick={handleSignOut} className='nav-link cursor-pointer fw-bold text-danger' to="/">Log out</Nav>
                                     </>

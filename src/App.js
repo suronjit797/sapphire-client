@@ -19,6 +19,7 @@ import ManageOrders from './Pages/Dashboard/ManageOrders';
 import ManageProducts from './Pages/Dashboard/ManageProducts';
 import MyOrders from './Pages/Dashboard/MyOrders';
 import Profile from './Pages/Dashboard/Profile';
+import Products from './Pages/Products/Products';
 
 function App() {
   return (
@@ -37,6 +38,7 @@ function App() {
         </Route>
         <Route path='/blogs' element={<RequireAuth> <Blog /></RequireAuth>} />
         <Route path='/portfolio' element={<Portfolio />} />
+        <Route path='/products' element={<Products />} />
         <Route path='/login' element={<Login />} />
         <Route path='/register' element={<Register />} />
       </Routes>

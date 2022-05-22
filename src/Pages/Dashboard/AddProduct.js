@@ -2,8 +2,11 @@ import React from 'react';
 import Swal from 'sweetalert2'
 import { useForm } from "react-hook-form";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faUser, faCloudArrowUp, faDollarSign, faArrowUp19 } from '@fortawesome/free-solid-svg-icons'
+import { faCloudArrowUp, faDollarSign, faArrowUp19 } from '@fortawesome/free-solid-svg-icons'
 import { faProductHunt } from '@fortawesome/free-brands-svg-icons'
+import axios from 'axios';
+import auth from '../../firebase.init';
+import { useAuthState } from 'react-firebase-hooks/auth';
 
 
 const AddProduct = () => {
@@ -13,7 +16,6 @@ const AddProduct = () => {
     const YYYY = '' + dt.getFullYear()
     let MM = '' + (dt.getMonth() + 1)
     let DD = '' + dt.getDate()
-
     if (MM.length < 2) {
         MM = '0' + MM;
     }
@@ -21,17 +23,37 @@ const AddProduct = () => {
         DD = '0' + DD;
     }
 
+    const [user] = useAuthState(auth);
+
+
 
     // react form
     const { register, handleSubmit, formState: { errors } } = useForm();
     const onSubmit = async (data) => {
         const { name, quantity, price, date, image } = data
-        const fromData = new FormData()
-        fromData.append('name', name)
-        fromData.append('price', price)
-        fromData.append('quantity', quantity)
-        fromData.append('date', date)
-        fromData.append('image', image[0])
+        const formData = new FormData()
+        formData.append('image', image[0])
+
+        // imagebb link
+        const curl = `https://api.imgbb.com/1/upload?key=${process.env.REACT_APP_IMG_BB}`
+
+        if ((image[0].size / 1024) > 1024) {
+            Swal.fire({
+                icon: 'error',
+                title: 'Oops...',
+                text: 'Image size must be under 1mb',
+            })
+        } else {
+            // upload image in imageBB
+            axios.post(curl, formData)
+                .then(res => {
+                    const { title, url, delete_url } = res.data.data
+                    axios.post('/products', { name, quantity, price, date, image: { title, url, delete_url }, email: user.email })
+                        .then(res => console.log(res.data))
+                })
+        }
+
+
 
 
     }
