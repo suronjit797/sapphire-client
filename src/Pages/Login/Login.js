@@ -25,10 +25,11 @@ const Login = () => {
         error,
     ] = useSignInWithEmailAndPassword(auth);
 
-// if error
+    // if error
     useEffect(() => {
         if (error) {
             FirebaseErrorMsg(error.message)
+            return
         }
     }, [error])
 
@@ -36,19 +37,10 @@ const Login = () => {
     useEffect(() => {
         if (user) {
             navigate(form)
+            return
         }
     }, [user, navigate, form])
 
-    // if loading
-        useEffect(() => {
-            if (loading ) {
-                return (
-                    <div className='center'>
-                        <Spinner animation="border" variant="primary" />
-                    </div>
-                )
-            }
-        }, [loading])
 
     // react hooks form
     const { register, handleSubmit, formState: { errors } } = useForm();
@@ -60,6 +52,16 @@ const Login = () => {
     const handleReset = () => {
 
     }
+
+
+        // if loading
+        if (loading) {
+            return (
+                <div className='center'>
+                    <Spinner animation="border" variant="primary" />
+                </div>
+            )
+        }
 
     return (
         <div className='form'>

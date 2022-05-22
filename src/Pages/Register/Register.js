@@ -16,7 +16,6 @@ const Register = () => {
     const navigate = useNavigate()
     const location = useLocation()
     let form = location?.state?.from?.pathname || "/";
-    console.log(location);
 
 
     // firebase hooks
@@ -32,8 +31,8 @@ const Register = () => {
     // if error
     useEffect(() => {
         if (error || updateError) {
-            console.log(error.message || updateError);
-            firebaseErrorMsg(error.message)
+            firebaseErrorMsg(error.message || updateError.message)
+            return
         }
     }, [error, updateError])
 
@@ -41,19 +40,10 @@ const Register = () => {
     useEffect(() => {
         if (user) {
             navigate(form)
+            return
         }
     }, [user, navigate, form])
 
-    // loading
-    useEffect(() => {
-        if (loading || updating) {
-            return (
-                <div className='center'>
-                    <Spinner animation="border" variant="primary" />
-                </div>
-            )
-        }
-    }, [loading, updating])
 
 
 
@@ -76,6 +66,17 @@ const Register = () => {
 
     const handleReset = () => {
 
+    }
+
+
+
+    // loading
+    if (loading || updating) {
+        return (
+            <div className='center'>
+                <Spinner animation="border" variant="primary" />
+            </div>
+        )
     }
     return (
         <div className='form'>
