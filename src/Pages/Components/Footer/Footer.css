@@ -3,10 +3,10 @@
 footer{    
     color: var(--bs-gray-300);
     font-weight: 500;
-    background-color: rgba(0, 2, 32, 0.95);
+    background-color: var(--bs-dark);
     background-image: url(../../../Images/footer.jpeg);
     background-position: center;
-    background-blend-mode: color;
+    background-blend-mode: multiply;
 }
 footer h5{
     text-transform: uppercase;
