@@ -28,7 +28,7 @@ const AddProduct = () => {
 
 
     // react form
-    const { register, handleSubmit, formState: { errors } } = useForm();
+    const { register, handleSubmit, reset, formState: { errors } } = useForm();
     const onSubmit = async (data) => {
         const { name, quantity, price, date, image } = data
         const formData = new FormData()
@@ -49,7 +49,17 @@ const AddProduct = () => {
                 .then(res => {
                     const { title, url, delete_url } = res.data.data
                     axios.post('/products', { name, quantity, price, date, image: { title, url, delete_url }, email: user.email })
-                        .then(res => console.log(res.data))
+                        .then(res => {
+                            if(res.data.acknowledged){
+                                Swal.fire({
+                                    icon: 'success',
+                                    title: 'Done',
+                                    text: 'Products add successfully',
+                                })
+
+                                reset()
+                            }
+                        })
                 })
         }
 
