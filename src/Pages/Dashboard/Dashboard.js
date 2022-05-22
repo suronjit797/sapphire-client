@@ -4,6 +4,9 @@ import { NavLink, Outlet } from 'react-router-dom'
 
 const Dashboard = () => {
 
+
+
+
     return (
         <div>
             <div className='dashboard'>
@@ -16,7 +19,7 @@ const Dashboard = () => {
                     <NavLink to='/dashboard/manage-products'> Manage Products </NavLink>
                 </div>
                 <div className="dashboard-right">
-                <Outlet />
+                    <Outlet />
                 </div>
             </div>
         </div>

@@ -45,10 +45,6 @@ const Register = () => {
     }, [user, navigate, form])
 
 
-
-
-
-
     const { register, handleSubmit, formState: { errors } } = useForm();
     const onSubmit = async (data) => {
         const { name, email, password, confirmPassword } = data
