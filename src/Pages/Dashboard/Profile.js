@@ -87,10 +87,22 @@ const Profile = () => {
                     <h4 className="name mt-4 mb-0"> {user.displayName} </h4>
                     <p className='text-success m-0' > {userDb.role} </p>
                 </div>
-                <p className="name">Email: {user.email} </p>
-                <p className="name">Phone: {user.email} </p>
-                <p className="name">Address: {user.email} </p>
-                <p className="name">Company Name: {user.email} </p>
+                <p className="m-1">
+                    <b className="text-primary">Email: </b>
+                    {user.email ? user.email : <span className="text-danger"> No data found </span>}
+                </p>
+                <p className="m-1">
+                    <b className="text-primary">Phone: </b>
+                    {userData.phone ? userData.phone : <span className="text-danger"> No data found </span>}
+                </p>
+                <p className="m-1">
+                    <b className="text-primary">Address: </b>
+                    {userData.address ? userData.address : <span className="text-danger"> No data found </span>}
+                </p>
+                <p className="">
+                    <b className="text-primary">Company Name: </b>
+                    {userData.company ? userData.company : <span className="text-danger"> No data found </span>}
+                </p>
 
 
                 <div className="d-flex justify-content-between align-items-center">
