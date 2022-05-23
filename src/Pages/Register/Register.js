@@ -40,7 +40,7 @@ const Register = () => {
     // if user
     useEffect(() => {
         if (user) {
-            axios.put('/user', { email: user.user.email, name: user.user.displayName })
+            axios.put('/users', { email: user.user.email, name: user.user.displayName })
                 .then(res => {
                     if (res) {
                         axios.post('/token', { email: user.user.email })

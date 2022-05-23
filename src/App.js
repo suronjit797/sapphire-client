@@ -38,7 +38,7 @@ function App() {
         </Route>
         <Route path='/blogs' element={<RequireAuth> <Blog /></RequireAuth>} />
         <Route path='/portfolio' element={<Portfolio />} />
-        <Route path='/products' element={<Products />} />
+        <Route path='/purchase' element={<Products />} />
         <Route path='/login' element={<Login />} />
         <Route path='/register' element={<Register />} />
       </Routes>

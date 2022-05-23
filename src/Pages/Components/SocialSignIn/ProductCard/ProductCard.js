@@ -27,8 +27,8 @@ const ProductCard = ({ product, index }) => {
 
     return (
         <Col>
-            <Link to='/' >
-                <Card className={`h-100 border-0 text-white productCard bg-${selectedColor}`}>
+            {/* <Link to='/' > */}
+                <Card className={`h-100 border-0 text-white overflow-hidden productCard bg-${selectedColor}`}>
                     <Card.Img variant="top" src={product?.image?.url} />
                     <Card.Body>
                         <Card.Title>{product.name}</Card.Title>
@@ -36,9 +36,11 @@ const ProductCard = ({ product, index }) => {
                             t longer.
                         </Card.Text>
                     </Card.Body>
-                    <Button variant='primary'> Buy Now </Button>
+                    <div className="d-flex bg-dark p-2">
+                        adsfd | lakdsdjfalsdv | jsdfalkjf
+                    </div>
                 </Card>
-            </Link>
+            {/* </Link> */}
         </Col>
     );
 };

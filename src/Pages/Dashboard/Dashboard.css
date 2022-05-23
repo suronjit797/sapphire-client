@@ -112,3 +112,49 @@ input[type=number] {
     height: 150px;
     width: 150px;
 }
+
+.profile-edit{
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    cursor: pointer;
+    color: var(--bs-primary);
+    font-size: 20px;
+}
+
+.profileForm{
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: #212335c7;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.profileForm form{
+    max-width: 350px;
+    background-color: #fff;
+    padding: 20px;
+}
+
+.profileForm form input{
+    width: 100%;
+    margin-bottom: 10px;
+    border: 1px solid rgba(100, 100, 100, 0.486);
+    border-radius: 4px;
+    outline: transparent !important;
+    padding: 5px 10px;
+}
+
+.profileForm form .close{
+    height: 20px;
+    width: 20px;
+    border-radius: 50%;
+    background-color: var(--bs-danger);
+    padding: 5px;
+    color: #fff;
+    cursor: pointer;
+}

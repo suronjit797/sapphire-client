@@ -31,12 +31,12 @@ const Header = () => {
                     <Navbar.Collapse id="basic-navbar-nav">
                         <Nav className="ms-auto">
                             <Nav.Link as={NavLink} to="/">Home</Nav.Link>
+                            <Nav.Link as={NavLink} to="/purchase">Purchase</Nav.Link>
                             <Nav.Link as={NavLink} to="/blogs">Blogs</Nav.Link>
                             <Nav.Link as={NavLink} to="/portfolio">My Portfolio</Nav.Link>
                             {
                                 user ? (
                                     <>
-                                        <Nav.Link as={NavLink} to="/products">Products</Nav.Link>
                                         <Nav.Link as={NavLink} to="/dashboard">Dashboard</Nav.Link>
                                         <Nav onClick={handleSignOut} className='nav-link cursor-pointer fw-bold text-danger' to="/">Log out</Nav>
                                     </>
