@@ -48,7 +48,7 @@ const AddProduct = () => {
             axios.post(curl, formData)
                 .then(res => {
                     const { title, url, delete_url } = res.data.data
-                    axios.post('/products', { name, quantity, price, date, image: { title, url, delete_url }, email: user.email })
+                    axios.post('/product', { name, quantity, price, date, image: { title, url, delete_url }, email: user.email })
                         .then(res => {
                             if(res.data.acknowledged){
                                 Swal.fire({

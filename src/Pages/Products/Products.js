@@ -1,6 +1,6 @@
 import axios from 'axios';
 import React, { useEffect } from 'react';
-import { Card, Col, Row, Spinner } from 'react-bootstrap';
+import { Row, Spinner } from 'react-bootstrap';
 import Swal from 'sweetalert2'
 import { useQuery } from 'react-query'
 import ProductCard from '../Components/SocialSignIn/ProductCard/ProductCard';
@@ -33,7 +33,7 @@ const Products = () => {
 
     return (
         <div className='container my-5'>
-            <Row xs={1} md={2} lg={4} className="g-5 align-items-stretch ">
+            <Row xs={1} sm={2} md={3} lg={4} className="g-5 align-items-stretch ">
                 {
                     products.map((product, index) => (
                         
