@@ -22,12 +22,15 @@ input[type=number] {
 
 .dashboard-left a {
     display: block;
-    padding: 10px 20px;
+    padding: 10px 0 10px 20px;
     color: #fff;
     transition: .3s ease;
     font-size: 14px;
-    border-bottom: 1px solid rgba(255, 255, 255, 0.178);
-    border-top: 1px solid rgba(255, 255, 255, 0.178);
+    margin: 5px 0 5px 20px;
+    border-radius: 50px 0 0 50px;
+}
+.dashboard-left a:first-child{
+    margin-top: 0;
 }
 
 .dashboard-left a:hover {
@@ -36,7 +39,8 @@ input[type=number] {
 }
 
 .dashboard-left a.active {
-    background-color: rgba(255, 255, 255, 0.178);
+    background-color: #dcdadd;
+    color: var(--bs-dark);
 }
 
 

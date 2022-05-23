@@ -6,6 +6,8 @@ import { Container, Nav, Navbar } from 'react-bootstrap'
 import { Link, NavLink } from 'react-router-dom';
 import auth from '../../../firebase.init';
 
+import './Header.css'
+
 
 const Header = () => {
 
