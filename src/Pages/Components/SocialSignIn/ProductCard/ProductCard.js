@@ -1,11 +1,14 @@
 import React from 'react';
-import { Button, Card, Col } from 'react-bootstrap';
-import { Link } from 'react-router-dom';
+import { Card, Col } from 'react-bootstrap';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faEye, faLink } from '@fortawesome/free-solid-svg-icons'
+import { Link } from 'react-router-dom'
+
 import './ProductCard.css'
 
 const ProductCard = ({ product, index }) => {
 
-    const color = ['info', 'warning', 'secondary', 'success', 'dark', 'danger', 'black']
+    const color = ['primary', 'warning', 'secondary', 'success', 'dark', 'danger', 'info']
 
     let selectedColor
 
@@ -28,18 +31,35 @@ const ProductCard = ({ product, index }) => {
     return (
         <Col>
             {/* <Link to='/' > */}
-                <Card className={`h-100 border-0 text-white overflow-hidden productCard bg-${selectedColor}`}>
+            <Card className={`h-100 border-0 text-white overflow-hidden productCard bg-${selectedColor}`}>
+                <div className="card_image">
                     <Card.Img variant="top" src={product?.image?.url} />
-                    <Card.Body>
-                        <Card.Title>{product.name}</Card.Title>
-                        <Card.Text>
-                            t longer.
-                        </Card.Text>
-                    </Card.Body>
-                    <div className="d-flex bg-dark p-2">
-                        adsfd | lakdsdjfalsdv | jsdfalkjf
+
+                    <div className="card_link">
+                        <Link to={`/purchase/${product._id}`} className='text-white' >
+                            <FontAwesomeIcon className='font-awesome' icon={faLink} />
+                        </Link>
+                        <FontAwesomeIcon className='font-awesome' icon={faEye} />
                     </div>
-                </Card>
+                </div>
+                <Card.Body>
+                    <Card.Title>{product.name}</Card.Title>
+                    <Card.Text>
+                        t longer.
+                    </Card.Text>
+                </Card.Body>
+                <div className="d-flex bg-black p-2 justify-content-between text-center">
+                    <small className='w-50 text-muted border-end border-white'>
+                        <b className='mb-0 '>Price</b>
+                        <div>${product.price}</div>
+                    </small>
+
+                    <small className='w-50 text-muted'>
+                        <b className="mb-0 "> Ratings </b>
+                        <div>  {product.rating} </div>
+                    </small>
+                </div>
+            </Card>
             {/* </Link> */}
         </Col>
     );
