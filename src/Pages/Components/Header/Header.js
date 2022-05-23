@@ -15,6 +15,7 @@ const Header = () => {
 
     const handleSignOut = event => {
         event.preventDefault()
+        localStorage.removeItem('token')
         signOut(auth)
     }
 

@@ -24,21 +24,21 @@ const RequireAuth = ({ children }) => {
         }
     }, [error])
 
-    // useEffect(() => {
-    //     const auth_token = localStorage.getItem('auth_token')
-    //     axios.get('/api/user/jwt-verify', {
-    //         headers: {
-    //             Authorization: `Bearer ${auth_token}`
-    //         }
-    //     })
-    //         .then(res => '')
-    //         .catch(error => {
-    //             if (error.request.status === 403 || error.request.status === 401) {
-    //                 signOut(auth)
-    //                 return <Navigate to="/login" state={{ from: location }} replace />;
-    //             }
-    //         })
-    // }, [location])
+    useEffect(() => {
+        const token = localStorage.getItem('token')
+        axios.get('/api/user/jwt-verify', {
+            headers: {
+                Authorization: `Bearer ${token}`
+            }
+        })
+            .then(res => '')
+            .catch(error => {
+                if (error.request.status === 403 || error.request.status === 401) {
+                    signOut(auth)
+                    return <Navigate to="/login" state={{ from: location }} replace />;
+                }
+            })
+    }, [location])
 
     // loading spinner
     if (loading) {

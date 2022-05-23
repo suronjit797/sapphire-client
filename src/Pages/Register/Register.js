@@ -10,6 +10,7 @@ import auth from '../../firebase.init';
 import { useEffect } from 'react';
 import firebaseErrorMsg from '../Components/firebaseErrorMsg'
 import { Spinner } from 'react-bootstrap';
+import axios from 'axios';
 
 
 const Register = () => {
@@ -39,7 +40,18 @@ const Register = () => {
     // if user
     useEffect(() => {
         if (user) {
-            navigate(form)
+            axios.put('/register', { email: user.user.email, name: user.user.displayName })
+                .then(res => {
+                    if (res) {
+                        axios.post('/token', { email: user.user.email })
+                            .then(res => {
+                                if (res) {
+                                    localStorage.setItem('token', res.data.token)
+                                    navigate(form)
+                                }
+                            })
+                    }
+                })
             return
         }
     }, [user, navigate, form])
@@ -59,11 +71,6 @@ const Register = () => {
             })
         }
     }
-
-    const handleReset = () => {
-
-    }
-
 
 
     // loading
@@ -94,7 +101,7 @@ const Register = () => {
                                         placeholder="Name"
                                     />
                                     <label htmlFor="name"> <FontAwesomeIcon icon={faUser} /> </label>
-                                    {errors.email && <p className='text-warning text-start'> Please provide a valid email! </p>}
+                                    {errors.name && <p className='text-warning text-start'> Please provide your name! </p>}
                                 </div>
                                 <div className="input">
                                     <input
@@ -129,17 +136,7 @@ const Register = () => {
                                     {errors?.confirmPassword?.type === 'minLength' && <p className='text-warning text-start'> Password must be at last 6 character! </p>}
                                 </div>
 
-                                <div className="d-block text-start d-sm-flex justify-content-between my-4">
-                                    <div className="form-check mb-3">
-                                        <input className="form-check-input" type="checkbox" value="" id="flexCheckCheckedDisabled" ></input>
-                                        <label className="form-check-label" htmlFor="flexCheckCheckedDisabled">
-                                            Remember me
-                                        </label>
-                                    </div>
-                                    <div onClick={handleReset} > Forget password? </div>
-                                </div>
-
-                                <button type='submit' className="btn btn-primary w-100 rounded-pill">Register </button>
+                                <button type='submit' className="btn btn-primary w-100 mt-4 rounded-pill">Register </button>
                             </form>
 
                             <p className='mt-3'> Already have an account? <Link to='/login'> Login Now </Link> </p>

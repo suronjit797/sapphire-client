@@ -21,6 +21,7 @@ const Footer = () => {
 
     const handleSignOut = event => {
         event.preventDefault()
+        localStorage.removeItem('token')
         signOut(auth)
     }
 

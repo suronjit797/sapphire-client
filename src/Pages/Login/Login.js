@@ -11,6 +11,7 @@ import auth from '../../firebase.init';
 import { useSignInWithEmailAndPassword } from 'react-firebase-hooks/auth';
 import FirebaseErrorMsg from '../Components/firebaseErrorMsg';
 import { Spinner } from 'react-bootstrap';
+import axios from 'axios';
 
 const Login = () => {
     const navigate = useNavigate()
@@ -29,15 +30,21 @@ const Login = () => {
     useEffect(() => {
         if (error) {
             FirebaseErrorMsg(error.message)
-            return
+
         }
     }, [error])
 
     // if user
     useEffect(() => {
         if (user) {
-            navigate(form)
-            return
+            axios.post('/token', { email: user.user.email })
+                .then(res => {
+                    if (res) {
+                        localStorage.setItem('token', res.data.token)
+                        navigate(form)
+                    }
+                })
+
         }
     }, [user, navigate, form])
 
@@ -54,14 +61,14 @@ const Login = () => {
     }
 
 
-        // if loading
-        if (loading) {
-            return (
-                <div className='center'>
-                    <Spinner animation="border" variant="primary" />
-                </div>
-            )
-        }
+    // if loading
+    if (loading) {
+        return (
+            <div className='center'>
+                <Spinner animation="border" variant="primary" />
+            </div>
+        )
+    }
 
     return (
         <div className='form'>
