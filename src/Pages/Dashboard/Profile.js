@@ -49,10 +49,10 @@ const Profile = () => {
 
     return (
         <div className='h-100 d-flex align-items-center justify-content-center'>
-            <div className="profile-card my-4 p-3">
+            <div className="profile-card rounded my-4 p-3">
                 <div className="text-center">
                     <img src={user?.photoURL || defaultUser} alt="" />
-                    <h3 className="name mb-0"> {user.displayName} </h3>
+                    <h4 className="name mt-4 mb-0"> {user.displayName} </h4>
                     <p className='text-success m-0' > {userDb.role} </p>
                     <p className="name">Email: {user.email} </p>
                 </div>

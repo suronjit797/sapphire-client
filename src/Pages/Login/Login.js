@@ -30,7 +30,6 @@ const Login = () => {
     useEffect(() => {
         if (error) {
             FirebaseErrorMsg(error.message)
-
         }
     }, [error])
 

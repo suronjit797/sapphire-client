@@ -1,15 +1,51 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faGoogle, faFacebookF, faGithub, faLinkedinIn } from '@fortawesome/free-brands-svg-icons'
 import Swal from 'sweetalert2'
+import { useSignInWithGoogle } from 'react-firebase-hooks/auth';
+import auth from '../../../firebase.init'
+
 
 import './SocialSignIn.css'
+import { useLocation, useNavigate } from 'react-router-dom';
+import FirebaseErrorMsg from '../firebaseErrorMsg';
+import { Spinner } from 'react-bootstrap';
+import axios from 'axios';
 
 
 const SocialSignIn = () => {
 
-    const handleGoogle = () => {
+    // for location
+    let navigate = useNavigate();
+    let location = useLocation();
+    let form = location?.state?.from?.pathname || "/";
 
+    const [signInWithGoogle, googleUser, googleLoading, googleError] = useSignInWithGoogle(auth);
+
+    // if user
+    useEffect(() => {
+        if (googleUser) {
+            axios.post('/token', { email: googleUser.user.email })
+                .then(res => {
+                    if (res) {
+                        localStorage.setItem('token', res.data.token)
+                        navigate(form, { replace: true });
+                    }
+                })
+        }
+    }, [googleUser, navigate, form])
+
+    // if error
+    useEffect(() => {
+        if (googleError) {
+            FirebaseErrorMsg(googleError.message)
+        }
+    }, [googleError])
+
+
+
+    const handleGoogle = () => {
+        signInWithGoogle()
     }
     const handleFacebook = () => {
         Swal.fire({
@@ -31,10 +67,14 @@ const SocialSignIn = () => {
     }
 
 
-
-
-
-
+    // if loading
+    if (googleLoading) {
+        return (
+            <div className='center'>
+                <Spinner animation="border" variant="primary" />
+            </div>
+        )
+    }
 
     return (
         <div>
