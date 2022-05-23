@@ -28,13 +28,13 @@ function App() {
       <Routes>
         <Route path='/' element={<Home />} />
         <Route path='/login' element={<Login />} />
-        <Route path='/dashboard' element={<Dashboard />}> 
+        <Route path='/dashboard' element={<RequireAuth><Dashboard /></RequireAuth>}>
           <Route index element={<MyOrders />} ></Route>
-          <Route path='add-review' element={<AddReview />} ></Route>
-          <Route path='my-profile' element={<Profile />} ></Route>
-          <Route path='manage-all-orders' element={ <ManageOrders /> } ></Route>
-          <Route path='add-product' element={<AddProduct />} ></Route>
-          <Route path='manage-products' element={ <ManageProducts />} ></Route>
+          <Route path='add-review' element={<RequireAuth><AddReview /></RequireAuth>} ></Route>
+          <Route path='my-profile' element={<RequireAuth><Profile /></RequireAuth>} ></Route>
+          <Route path='manage-all-orders' element={<RequireAuth><ManageOrders /></RequireAuth>} ></Route>
+          <Route path='add-product' element={<RequireAuth><AddProduct /></RequireAuth>} ></Route>
+          <Route path='manage-products' element={<RequireAuth><ManageProducts /></RequireAuth>} ></Route>
         </Route>
         <Route path='/blogs' element={<RequireAuth> <Blog /></RequireAuth>} />
         <Route path='/portfolio' element={<Portfolio />} />

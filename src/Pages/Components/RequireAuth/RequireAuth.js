@@ -26,7 +26,7 @@ const RequireAuth = ({ children }) => {
 
     useEffect(() => {
         const token = localStorage.getItem('token')
-        axios.get('/api/user/jwt-verify', {
+        axios.get('/jwt-verify', {
             headers: {
                 Authorization: `Bearer ${token}`
             }
