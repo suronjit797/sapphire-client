@@ -30,7 +30,6 @@ const ProductCard = ({ product, index }) => {
 
     return (
         <Col>
-            {/* <Link to='/' > */}
             <Card className={`h-100 border-0 text-white overflow-hidden productCard bg-${selectedColor}`}>
                 <div className="card_image">
                     <Card.Img variant="top" src={product?.image?.url} />
@@ -60,7 +59,6 @@ const ProductCard = ({ product, index }) => {
                     </small>
                 </div>
             </Card>
-            {/* </Link> */}
         </Col>
     );
 };

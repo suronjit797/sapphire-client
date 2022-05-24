@@ -2,7 +2,7 @@ import React from 'react';
 import Swal from 'sweetalert2'
 import { useForm } from "react-hook-form";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faCloudArrowUp, faDollarSign, faArrowUp19 } from '@fortawesome/free-solid-svg-icons'
+import { faCloudArrowUp, faDollarSign, faArrowUp19, faArrowDownUpAcrossLine } from '@fortawesome/free-solid-svg-icons'
 import { faProductHunt } from '@fortawesome/free-brands-svg-icons'
 import axios from 'axios';
 import auth from '../../firebase.init';
@@ -30,7 +30,7 @@ const AddProduct = () => {
     // react form
     const { register, handleSubmit, reset, formState: { errors } } = useForm();
     const onSubmit = async (data) => {
-        const { name, quantity, price, date, image } = data
+        const { name, quantity, price, date, image, limit, description } = data
         const formData = new FormData()
         formData.append('image', image[0])
 
@@ -48,7 +48,7 @@ const AddProduct = () => {
             axios.post(curl, formData)
                 .then(res => {
                     const { title, url, delete_url } = res.data.data
-                    axios.post('/product', { name, quantity, price, date, image: { title, url, delete_url }, email: user.email })
+                    axios.post('/product', { name, quantity, price, date, limit, description, image: { title, url, delete_url }, email: user.email })
                         .then(res => {
                             if(res.data.acknowledged){
                                 Swal.fire({
@@ -56,15 +56,11 @@ const AddProduct = () => {
                                     title: 'Done',
                                     text: 'Products add successfully',
                                 })
-
                                 reset()
                             }
                         })
                 })
         }
-
-
-
 
     }
 
@@ -96,6 +92,17 @@ const AddProduct = () => {
                         />
                         <label htmlFor="quantity"> <FontAwesomeIcon icon={faArrowUp19} /> </label>
                         {errors.quantity && <p className='text-danger mt-1 text-start'> Please provide quantity! </p>}
+                    </div>
+                    <div className="input">
+                        <input
+                            type='number'
+                            className='form-control'
+                            id='limit'
+                            {...register("limit", { required: true })}
+                            placeholder=" Minimum Products Limits"
+                        />
+                        <label htmlFor="limit"> <FontAwesomeIcon icon={faArrowDownUpAcrossLine} /> </label>
+                        {errors.limit && <p className='text-danger mt-1 text-start'> Please provide Minimum Products Limits! </p>}
                     </div>
                     <div className="input">
                         <input

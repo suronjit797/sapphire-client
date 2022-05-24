@@ -22,6 +22,15 @@ const Home = () => {
         }
     }, [error])
 
+
+    if (!Array.isArray(products)) {
+        return (
+            <div className='center'>
+                <Spinner animation="border" variant="primary" />
+            </div>
+        )
+    }
+
     if (isLoading) {
         return (
             <div className='center'>
@@ -36,7 +45,7 @@ const Home = () => {
             <div className='container my-5'>
                 <Row xs={1} sm={2} md={3} lg={4} className="g-5 align-items-stretch ">
                     {
-                        products.map((product, index) => (
+                        products?.map((product, index) => (
                             <ProductCard key={product._id} product={product} index={index} />
                         ))
                     }
