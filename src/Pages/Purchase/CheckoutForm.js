@@ -1,12 +1,27 @@
 
 import { CardElement, useElements, useStripe } from '@stripe/react-stripe-js';
-import React from 'react';
+import axios from 'axios';
+import React, { useEffect, useState } from 'react';
 import Swal from 'sweetalert2'
 
 
-const CheckoutForm = () => {
+const CheckoutForm = ({ onHide, paymentData }) => {
+    const { orderPrice, userName, email, phone } = paymentData
     const stripe = useStripe();
     const elements = useElements();
+    const [clientSecret, setClientSecret] = useState('')
+
+    useEffect(() => {
+        if (orderPrice) {
+            const token = localStorage.getItem('token')
+            axios.post('/payment-intent', { price: orderPrice || 0 }, {
+                headers: {
+                    Authorization: `Bearer ${token}`
+                }
+            })
+                .then(res => setClientSecret(res.data))
+        }
+    }, [orderPrice])
 
 
     const handleSubmit = async (event) => {
@@ -21,7 +36,7 @@ const CheckoutForm = () => {
         if (card == null) {
             return;
         }
-        const { error, paymentMethod } = await stripe.createPaymentMethod({
+        const {error, paymentMethod } = await stripe.createPaymentMethod({
             type: 'card',
             card,
         });
@@ -38,13 +53,50 @@ const CheckoutForm = () => {
                 title: 'Success',
                 text: 'Payment successfully',
             })
+            onHide()
         }
+
+
+        // confimr card payment
+        
+        const { paymentIntent, error: intentError } = await stripe.confirmCardPayment(
+            clientSecret.clientSecret,
+            {
+                payment_method: {
+                    card: card,
+                    billing_details: {
+                        name: userName,
+                        phone,
+                        email
+                    },
+                },
+            },
+        );
+
+
+        if (intentError) {
+            Swal.fire({
+                icon: 'error',
+                text: error?.message,
+            })
+        } else {
+            console.log(paymentIntent);
+            Swal.fire({
+                icon: 'success',
+                title: 'Congrats!!',
+                text: 'Your payment is completed',
+            })
+        }
+
+
+
 
 
     };
     return (
         <form onSubmit={handleSubmit}>
             <CardElement
+                className='form-control'
                 options={{
                     style: {
                         base: {
@@ -60,8 +112,8 @@ const CheckoutForm = () => {
                     },
                 }}
             />
-            <button type="submit" disabled={!stripe}>
-                Pay
+            <button className='btn btn-primary mt-3' type="submit" disabled={!stripe}>
+                Payment proceed
             </button>
         </form>
     );

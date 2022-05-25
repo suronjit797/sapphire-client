@@ -1,23 +1,11 @@
 import React, { useState } from 'react';
 import Swal from 'sweetalert2'
-import { useForm } from "react-hook-form";
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faCloudArrowUp, faDollarSign, faArrowUp19, faArrowDownUpAcrossLine } from '@fortawesome/free-solid-svg-icons'
-import { faProductHunt } from '@fortawesome/free-brands-svg-icons'
 import axios from 'axios';
 import auth from '../../firebase.init';
 import { useAuthState } from 'react-firebase-hooks/auth';
 import { Spinner } from 'react-bootstrap';
 import { loadStripe } from '@stripe/stripe-js';
-import {
-    CardElement,
-    Elements,
-    useStripe,
-    useElements,
-} from '@stripe/react-stripe-js';
-import CheckoutForm from './CheckoutForm';
 
-const stripePromise = loadStripe('pk_test_51L2xACGDwhQzJu6wWcWF0eTNpLTfoiILBu0oaxxhPIa7Qq1A5XDRbOht4Z5T6BXxkjnQHqBrji7dhWLCpBw1Ghc000WTiwtXIr');
 
 const PurchaseForm = ({ product, refetch }) => {
     const { _id, name, price, quantity, date, image, rating, totalRating, limit, description, } = product
@@ -149,16 +137,10 @@ const PurchaseForm = ({ product, refetch }) => {
                 <button className="btn btn-primary"> Payment </button>
 
 
-
-
             </form>
 
 
 
-
-            <Elements stripe={stripePromise}>
-                <CheckoutForm />
-            </Elements>
         </div>
     );
 };

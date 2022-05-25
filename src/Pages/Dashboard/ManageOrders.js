@@ -1,6 +1,6 @@
 import axios from 'axios';
 import React, { useEffect } from 'react';
-import { Button, Card, Col, Row, Spinner, Table } from 'react-bootstrap';
+import {  Card, Col, Row, Spinner } from 'react-bootstrap';
 import { useQuery } from 'react-query';
 import Swal from 'sweetalert2';
 

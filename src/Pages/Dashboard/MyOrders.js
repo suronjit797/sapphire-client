@@ -1,8 +1,19 @@
 import axios from 'axios';
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Card, Col, Row, Spinner } from 'react-bootstrap';
 import { useQuery } from 'react-query';
 import Swal from 'sweetalert2';
+import {
+    CardElement,
+    Elements,
+    useStripe,
+    useElements,
+} from '@stripe/react-stripe-js';
+import CheckoutForm from '../Purchase/CheckoutForm';
+import { loadStripe } from '@stripe/stripe-js';
+import MyModal from '../Components/Modal/MyModal';
+
+const stripePromise = loadStripe('pk_test_51L2xACGDwhQzJu6wWcWF0eTNpLTfoiILBu0oaxxhPIa7Qq1A5XDRbOht4Z5T6BXxkjnQHqBrji7dhWLCpBw1Ghc000WTiwtXIr');
 
 const MyOrders = () => {
     const { isLoading, error, data: myOrders, refetch } = useQuery('myOrders', () =>
@@ -20,8 +31,14 @@ const MyOrders = () => {
     )
 
 
-    const handlePayment = id => {
+    const [modalShow, setModalShow] = useState(false);
+    const [paymentData, setPaymentData] = useState({})
 
+    const handlePayment = (id) => {
+        axios.get(`/order/${id}`, { price: 10 })
+            .then(res => setPaymentData(res.data))
+        console.log(paymentData);
+        setModalShow(true)
     }
     const handleRemove = id => {
 
@@ -59,7 +76,7 @@ const MyOrders = () => {
                             <Card className='h-100'>
                                 <Card.Body>
                                     <Card.Title className='fw-bold'> {order.productName || 'Undefine'} </Card.Title>
-                                    <Card.Text>
+                                    <div>
                                         <small> {order.paid ?
                                             <small className="border border-2 d-inline-block p-1 px-2 mb-2 rounded-pill border-success  text-success">Paid</small> :
                                             <small className="border border-2 d-inline-block p-1 px-2 mb-2 rounded-pill border-warning  text-warning">Pending</small>} </small>
@@ -69,13 +86,18 @@ const MyOrders = () => {
                                         <div> <b className="text-capitalize"> orderQuantity: </b> {order.orderQuantity} </div>
                                         <div> <b className="text-capitalize"> orderPrice: </b> {order.orderPrice} </div>
                                         <div> <b className="text-capitalize"> address: </b> {order.address} </div>
-                                    </Card.Text>
+                                    </div>
                                 </Card.Body>
                                 <div className="d-flex">
-                                    <button onClick={() => handlePayment(order._id)} className="w-100 btn btn-primary mt-auto" disabled={order.paid}> {order.paid ? 'Padi' : 'Payment'} </button>
-                                    <button onClick={() => handleRemove(order._id)} className="w-100 btn btn-danger mt-auto" disabled={!order.delivered}> cancel order </button>
+                                    <button onClick={() => handlePayment(order._id)} className="w-100 btn btn-primary mt-auto" disabled={order.paid}> {order.paid ? 'Paid' : 'Payment'} </button>
+                                    <button onClick={() => handleRemove(order._id)} className="w-100 btn btn-danger mt-auto" disabled={order.paid}> cancel order </button>
                                 </div>
                             </Card>
+                            <MyModal
+                                paymentData={paymentData}
+                                show={modalShow}
+                                onHide={() => setModalShow(false)}
+                            />
                         </Col>
                     )) : <p className="text-danger"> No orders hare </p>
                 }
