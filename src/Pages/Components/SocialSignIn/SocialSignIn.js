@@ -25,13 +25,20 @@ const SocialSignIn = () => {
     // if user
     useEffect(() => {
         if (googleUser) {
-            axios.post('/token', { email: googleUser.user.email })
+            axios.put('/users', { email: googleUser.user.email, name: googleUser.user.displayName })
                 .then(res => {
-                    if (res) {
-                        localStorage.setItem('token', res.data.token)
-                        navigate(form, { replace: true });
+                    if (res.data) {
+                        axios.post('/token', { email: googleUser.user.email })
+                            .then(res => {
+                                if (res) {
+                                    localStorage.setItem('token', res.data.token)
+                                    navigate(form, { replace: true });
+                                }
+                            })
                     }
                 })
+
+
         }
     }, [googleUser, navigate, form])
 

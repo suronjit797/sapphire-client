@@ -14,7 +14,7 @@ import PurchaseForm from './PurchaseForm';
 const Purchase = () => {
     const { id } = useParams()
     const [user, loading, userError] = useAuthState(auth)
-    const { isLoading, error, data: product } = useQuery(['products', id], () =>
+    const { isLoading, error, data: product, refetch } = useQuery(['products', id], () =>
         axios.get(`/product/${id}`).then(res => res.data)
     )
 
@@ -60,7 +60,7 @@ const Purchase = () => {
                 </Col>
                 <Col lg={4}>
                     <div className='purchase_left'>
-                        <PurchaseForm product={product} />
+                        <PurchaseForm product={product} refetch={refetch} />
                     </div>
                 </Col>
             </Row>

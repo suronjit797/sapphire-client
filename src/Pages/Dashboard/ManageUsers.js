@@ -21,7 +21,6 @@ const ManageUsers = () => {
             if (result.isConfirmed) {
                 axios.delete(`/users/${id}`)
                     .then(res => {
-                        console.log(res.data)
                         Swal.fire('Remove!', '', 'success')
                         refetch()
                     })

@@ -29,7 +29,8 @@ input[type=number] {
     margin: 5px 0 5px 20px;
     border-radius: 50px 0 0 50px;
 }
-.dashboard-left a:first-child{
+
+.dashboard-left a:first-child {
     margin-top: 0;
 }
 
@@ -78,9 +79,11 @@ input[type=number] {
     position: relative;
     margin-bottom: 15px;
 }
+
 .addProductInner .input input[type='file'] {
     display: none;
 }
+
 .addProductInner .input .imageLabel {
     background-color: #212335;
     height: 40px;
@@ -103,17 +106,17 @@ input[type=number] {
 }
 
 /* profile-card */
-.profile-card{
+.profile-card {
     width: 400px;
     background-color: white;
 }
 
-.profile-card img{
+.profile-card img {
     height: 150px;
     width: 150px;
 }
 
-.profile-edit{
+.profile-edit {
     position: absolute;
     top: 10px;
     right: 10px;
@@ -122,7 +125,7 @@ input[type=number] {
     font-size: 20px;
 }
 
-.profileForm{
+.profileForm {
     position: fixed;
     top: 0;
     left: 0;
@@ -134,13 +137,13 @@ input[type=number] {
     justify-content: center;
 }
 
-.profileForm form{
+.profileForm form {
     max-width: 350px;
     background-color: #fff;
     padding: 20px;
 }
 
-.profileForm form input{
+.profileForm form input {
     width: 100%;
     margin-bottom: 10px;
     border: 1px solid rgba(100, 100, 100, 0.486);
@@ -149,7 +152,7 @@ input[type=number] {
     padding: 5px 10px;
 }
 
-.profileForm form .close{
+.profileForm form .close {
     height: 20px;
     width: 20px;
     border-radius: 50%;
@@ -157,4 +160,16 @@ input[type=number] {
     padding: 5px;
     color: #fff;
     cursor: pointer;
+}
+
+/* manageOrders */
+
+.manageOrders .card button.btn-primary {
+    border-radius: 0 0 0 5px;
+    box-shadow: none !important;
+}
+
+.manageOrders .card button.btn-danger {
+    border-radius: 0 0 5px 0;
+    box-shadow: none !important;
 }

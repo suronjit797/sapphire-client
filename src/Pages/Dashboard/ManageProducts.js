@@ -2,6 +2,8 @@ import React, { useEffect } from 'react';
 import axios from 'axios';
 import { Table, Spinner, Button } from 'react-bootstrap'
 import Swal from 'sweetalert2'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faGoogle, faFacebookF, faGithub, faLinkedinIn, faTrash, faPenToSquare } from '@fortawesome/free-solid-svg-icons'
 import { useQuery } from 'react-query'
 
 const ManageProducts = () => {
@@ -21,9 +23,8 @@ const ManageProducts = () => {
 
     // remove handler
     const handleRemove = id => {
-
         Swal.fire({
-            title: 'Are you suer want to delete?',
+            title: 'Are you sure want to delete?',
             showDenyButton: true,
             showCancelButton: true,
             confirmButtonText: 'Delete',
@@ -42,6 +43,33 @@ const ManageProducts = () => {
                 Swal.fire('Changes are not saved', '', 'info')
             }
         })
+    }
+    const handleEdit = async (id, quantity) => {
+        const { value: Quantity } = await Swal.fire({
+            title: 'Input Quantity Number',
+            input: 'number',
+            inputLabel: 'Your Quantity Number',
+            inputPlaceholder: 'Enter your Quantity Number',
+            inputValidator: (value) => {
+                if (!value) {
+                    return 'Set a number to update quantity'
+                }
+            }
+        })
+
+        if (Quantity) {
+            axios.put(`/product/${id}`, {quantity: parseInt(Quantity) + parseInt(quantity)})
+                .then(res => {
+                    console.log(res.data);
+                    Swal.fire('Updated!', '', 'success')
+                    refetch()
+                })
+                .catch(error => {
+                    Swal.fire(error.message, '', 'error')
+                })
+        }
+
+
 
 
     }
@@ -80,7 +108,8 @@ const ManageProducts = () => {
                                 <td>{product.quantity}</td>
                                 <td>{parseInt(product.rating) / parseInt(product.totalRating || 1)}</td>
                                 <td>
-                                    <Button variant='danger' onClick={() => handleRemove(product._id)}> Remove </Button>
+                                    <Button className='me-2' variant='primary' onClick={() => handleEdit(product._id, product.quantity)}> <FontAwesomeIcon icon={faPenToSquare} /> </Button>
+                                    <Button variant='danger' onClick={() => handleRemove(product._id)}> <FontAwesomeIcon icon={faTrash} /> </Button>
                                 </td>
                             </tr>
                         ))
