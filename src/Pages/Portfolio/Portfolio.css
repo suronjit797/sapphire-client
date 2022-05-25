@@ -1,0 +1,17 @@
+.skill-progress .progress{
+    height: 7px;
+    margin-bottom: 5px;
+}
+
+.portfolio .portfolio_img{
+    height: 250px;
+    background-position: top;
+    background-size: cover;
+    background-repeat: no-repeat;
+    transition: 1.4s linear;
+}
+
+.portfolio .card:hover .portfolio_img{
+    background-position: bottom;
+
+}

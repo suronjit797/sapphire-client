@@ -5,12 +5,33 @@ import { useQuery } from 'react-query';
 import Swal from 'sweetalert2';
 
 const ManageUsers = () => {
-    const { isLoading, error, data: users } = useQuery('products', () =>
+    const { isLoading, error, data: users, refetch } = useQuery('products', () =>
         axios.get('/users').then(res => res.data)
     )
 
 
-    const handleRemove = () => {
+    const handleRemove = id => {
+        Swal.fire({
+            title: 'Are you suer want to delete?',
+            showDenyButton: true,
+            showCancelButton: true,
+            confirmButtonText: 'Delete',
+            denyButtonText: `Don't Delete`,
+        }).then((result) => {
+            if (result.isConfirmed) {
+                axios.delete(`/users/${id}`)
+                    .then(res => {
+                        console.log(res.data)
+                        Swal.fire('Remove!', '', 'success')
+                        refetch()
+                    })
+                    .catch(error => {
+                        Swal.fire(error.message, '', 'error')
+                    })
+            } else if (result.isDenied) {
+                Swal.fire('Changes are not saved', '', 'info')
+            }
+        })
 
     }
 

@@ -35,6 +35,9 @@ const ManageProducts = () => {
                         Swal.fire('Remove!', '', 'success')
                         refetch()
                     })
+                    .catch(error => {
+                        Swal.fire(error.message, '', 'error')
+                    })
             } else if (result.isDenied) {
                 Swal.fire('Changes are not saved', '', 'info')
             }
