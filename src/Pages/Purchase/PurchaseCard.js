@@ -1,19 +1,45 @@
 import React from 'react';
+import { Spinner } from 'react-bootstrap'
 
-const PurchaseCard = ({product}) => {
+const PurchaseCard = ({ product }) => {
+
+    if (!typeof (product) === 'Object') {
+        return (
+            <div className='center'>
+                <Spinner animation="border" variant="primary" />
+            </div>
+        )
+    }
+
+    const { name, price, quantity, date, image, rating, totalRating, limit, description, } = product
+
+
+
+
+
     return (
-        <div>
-            <div className="card mb-3">
-                <div className="row g-0">
-                    <div className="col-md-4">
-                        <img src={product?.image?.url} className="img-fluid rounded-start" alt="..."/>
-                    </div>
-                    <div className="col-md-8">
-                        <div className="card-body">
-                            <h5 className="card-title">{product?.name}</h5>
-                            <p className="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
-                            <p className="card-text"><small className="text-muted">Last updated 3 mins ago</small></p>
+        <div className="card mb-3 rounded-2 overflow-hidden">
+            <div className="row g-0 align-items-center">
+                <div className="col-md-4">
+                    <img src={image?.url} className="img-fluid rounded-start" alt="..." />
+                </div>
+                <div className="col-md-8">
+                    <div className="card-body">
+                        <h5 className="card-title">{name}</h5>
+                        <div>
+                            <b className='text-primary'>Price: </b> {price}
                         </div>
+                        <div> <b className='text-primary'>Limits: </b> {limit} </div>
+                        <div> <b className='text-primary'>Quantity: </b> {quantity} </div>
+                        <div> <b className='text-primary'>Date of production: </b> {date} </div>
+                        <div> <b className='text-primary'>Ratings: </b> {date} </div>
+                        <div> <b className='text-primary'>Ratings: </b>
+                            {
+                                (totalRating / rating) ? (totalRating / rating).toFixed(2) : 5
+                            }
+                        </div>
+
+                        <div> <b className='text-primary'>Description: </b> {description} </div>
                     </div>
                 </div>
             </div>

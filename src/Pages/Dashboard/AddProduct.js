@@ -80,7 +80,7 @@ const AddProduct = () => {
                             placeholder=" Products Name"
                         />
                         <label htmlFor="name"> <FontAwesomeIcon icon={faProductHunt} /> </label>
-                        {errors.name && <p className='text-danger mt-1 text-start'> Please provide a valid email! </p>}
+                        {errors.name && <p className='text-danger mt-1 text-start'> Please provide product name! </p>}
                     </div>
                     <div className="input">
                         <input
