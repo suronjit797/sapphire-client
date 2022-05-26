@@ -3,20 +3,12 @@ import React, { useEffect, useState } from 'react';
 import { Card, Col, Row, Spinner } from 'react-bootstrap';
 import { useQuery } from 'react-query';
 import Swal from 'sweetalert2';
-import {
-    CardElement,
-    Elements,
-    useStripe,
-    useElements,
-} from '@stripe/react-stripe-js';
-import CheckoutForm from '../Purchase/CheckoutForm';
-import { loadStripe } from '@stripe/stripe-js';
+
 import MyModal from '../Components/Modal/MyModal';
 
-const stripePromise = loadStripe('pk_test_51L2xACGDwhQzJu6wWcWF0eTNpLTfoiILBu0oaxxhPIa7Qq1A5XDRbOht4Z5T6BXxkjnQHqBrji7dhWLCpBw1Ghc000WTiwtXIr');
 
 const MyOrders = () => {
-    const { isLoading, error, data: myOrders, refetch } = useQuery('myOrders', () =>
+    const { isLoading, error, data: myOrders } = useQuery('myOrders', () =>
         axios.get('/user-order', {
             headers: {
                 Authorization: `Bearer ${localStorage.getItem('token')}`

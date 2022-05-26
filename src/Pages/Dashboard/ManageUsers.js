@@ -31,7 +31,28 @@ const ManageUsers = () => {
                 Swal.fire('Changes are not saved', '', 'info')
             }
         })
-
+    }
+    const handleAdmin = email => {
+        Swal.fire({
+            title: 'Are you suer want to delete?',
+            showDenyButton: true,
+            showCancelButton: true,
+            confirmButtonText: 'Make admin',
+            denyButtonText: `Don't Change`,
+        }).then((result) => {
+            if (result.isConfirmed) {
+                axios.put(`/make-admin`, {email})
+                    .then(res => {
+                        Swal.fire('Update!', '', 'success')
+                        refetch()
+                    })
+                    .catch(error => {
+                        Swal.fire(error.message, '', 'error')
+                    })
+            } else if (result.isDenied) {
+                Swal.fire('Changes are not saved', '', 'info')
+            }
+        })
     }
 
 
@@ -67,13 +88,14 @@ const ManageUsers = () => {
                 </thead>
                 <tbody>
                     {
-                        users.map((user, index) => (
+                        Array.isArray(users) && users.map((user, index) => (
                             <tr key={user._id}>
                                 <td>{index + 1}</td>
                                 <td>{user.name}</td>
                                 <td>{user.email}</td>
-                                <td>{user.role}</td>
+                                <td>{user.role ? user.role : 'user'}</td>
                                 <td>
+                                    <Button variant='primary' disabled={user?.role === 'admin'} className='me-2' onClick={() => handleAdmin(user.email) }> Make admin </Button>
                                     <Button variant='danger' onClick={() => handleRemove(user._id)}> Remove </Button>
                                 </td>
                             </tr>

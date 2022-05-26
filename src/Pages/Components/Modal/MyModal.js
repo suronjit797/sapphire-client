@@ -1,11 +1,9 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { Button, Modal } from 'react-bootstrap';
 import CheckoutForm from '../../Purchase/CheckoutForm';
 import {
-    CardElement,
     Elements,
-    useStripe,
-    useElements,
+
 } from '@stripe/react-stripe-js';
 import { loadStripe } from '@stripe/stripe-js';
 

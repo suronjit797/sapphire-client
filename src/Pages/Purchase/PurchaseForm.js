@@ -4,16 +4,14 @@ import axios from 'axios';
 import auth from '../../firebase.init';
 import { useAuthState } from 'react-firebase-hooks/auth';
 import { Spinner } from 'react-bootstrap';
-import { loadStripe } from '@stripe/stripe-js';
 
 
 const PurchaseForm = ({ product, refetch }) => {
-    const { _id, name, price, quantity, date, image, rating, totalRating, limit, description, } = product
+    const { _id, price, quantity, limit } = product
     const [user] = useAuthState(auth);
-    const [clientSecret, setClientSecret] = useState('')
 
-    const [userName, setUserName] = useState(user?.displayName)
-    const [email, setEmail] = useState(user.email)
+    const [userName] = useState(user?.displayName)
+    const [email] = useState(user.email)
     const [phone, setPhone] = useState('')
     const [address, setAddress] = useState('')
     const [orderQuantity, setOrderQuantity] = useState(limit)
