@@ -53,7 +53,7 @@ const ProductCard = ({ product, index }) => {
                 </div>
                 <Card.Body>
                     <Card.Title>{name}</Card.Title>
-                    <Card.Text>
+                    <div>
                         <div> <b> Ratings: </b>
                             {
                                 (totalRating / rating) ? (totalRating / rating).toFixed(2) : 5
@@ -61,7 +61,7 @@ const ProductCard = ({ product, index }) => {
                         </div>
                         <div><b className='mb-0 '>Price: </b> ${price}</div>
                         <div><b className='mb-0 '>Quantity: </b> ${quantity}</div>
-                    </Card.Text>
+                    </div>
                 </Card.Body>
                 <Link to={`/purchase/${_id}`} className="btn btn-success w-100"> Buy now </Link>
             </Card>

@@ -1,5 +1,5 @@
 import axios from 'axios';
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Button, Spinner, Table } from 'react-bootstrap';
 import { useQuery } from 'react-query';
 import Swal from 'sweetalert2';
@@ -8,6 +8,21 @@ const ManageUsers = () => {
     const { isLoading, error, data: users, refetch } = useQuery('products', () =>
         axios.get('/users').then(res => res.data)
     )
+
+
+    const [cUser, setCUser] = useState({})
+    const [loading, setLoading] = useState(true)
+
+    useEffect(() => {
+        axios.get('/jwt-verify', {
+            headers: {
+                Authorization: `Bearer ${localStorage.getItem('token')}`
+            }
+        }).then(res => {
+            setCUser(res.data)
+            setLoading(false)
+        })
+    }, [loading])
 
 
     const handleRemove = id => {
@@ -41,7 +56,7 @@ const ManageUsers = () => {
             denyButtonText: `Don't Change`,
         }).then((result) => {
             if (result.isConfirmed) {
-                axios.put(`/make-admin`, {email})
+                axios.put(`/make-admin`, { email })
                     .then(res => {
                         Swal.fire('Update!', '', 'success')
                         refetch()
@@ -83,7 +98,7 @@ const ManageUsers = () => {
                         <th>Name</th>
                         <th>Email</th>
                         <th>Role</th>
-                        <th>Action</th>
+                        <th className={cUser.role === 'admin' ? "" : 'd-none'}>Action</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -94,8 +109,8 @@ const ManageUsers = () => {
                                 <td>{user.name}</td>
                                 <td>{user.email}</td>
                                 <td>{user.role ? user.role : 'user'}</td>
-                                <td>
-                                    <Button variant='primary' disabled={user?.role === 'admin'} className='me-2' onClick={() => handleAdmin(user.email) }> Make admin </Button>
+                                <td className={cUser.role === 'admin' ? "" : 'd-none'}>
+                                    <Button variant='primary' disabled={user?.role === 'admin'} className='me-2' onClick={() => handleAdmin(user.email)}> Make admin </Button>
                                     <Button variant='danger' onClick={() => handleRemove(user._id)}> Remove </Button>
                                 </td>
                             </tr>

@@ -10,6 +10,7 @@ import auth from '../../firebase.init';
 import './Purchase.css';
 import PurchaseCard from './PurchaseCard';
 import PurchaseForm from './PurchaseForm';
+import ReviewForm from './ReviewForm';
 
 const Purchase = () => {
     const { id } = useParams()
@@ -49,13 +50,14 @@ const Purchase = () => {
     return (
         <div className='container my-4'>
             <div>
-            <div>{user.name? user.name: <p className="text-danger mb-0">No Name found</p> }</div>
-            <p>{user.email? user.email: <p className="text-danger mb-0">No Email found</p> }</p>
+                <div>{user.displayName ? user.displayName : <p className="text-danger mb-0">No Name found</p>}</div>
+                <p>{user.email ? user.email : <p className="text-danger mb-0">No Email found</p>}</p>
             </div>
             <Row>
                 <Col lg={8}>
                     <div className='purchase_left'>
                         <PurchaseCard product={product} />
+                        <ReviewForm productId={product._id} displayName={user.displayName} email={user.email} />
                     </div>
                 </Col>
                 <Col lg={4}>

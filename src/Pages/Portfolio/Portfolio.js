@@ -85,12 +85,12 @@ const Portfolio = () => {
                             <div className="card-img-top portfolio_img" style={{ backgroundImage: `url(${assignment11})` }} />
                             <Card.Body>
                                 <Card.Title> HIBISCUS </Card.Title>
-                                <Card.Text>
+                                <div>
                                     A MERN stack inventory management website
-                                </Card.Text>
-                                <Card.Text>
+                                </div>
+                                <div>
                                     <a target='_blank' rel='noreferrer' className='btn btn-primary' href="https://assignment-11-c705a.web.app/">  Live preview </a>
-                                </Card.Text>
+                                </div>
 
 
                             </Card.Body>
@@ -101,12 +101,12 @@ const Portfolio = () => {
                             <div className="card-img-top portfolio_img" style={{ backgroundImage: `url(${assignment10})` }} />
                             <Card.Body>
                                 <Card.Title> RANGER </Card.Title>
-                                <Card.Text>
+                                <div>
                                     A tourism booking website
-                                </Card.Text>
-                                <Card.Text>
+                                </div>
+                                <div>
                                     <a target='_blank' rel='noreferrer' className='btn btn-primary' href="https://assignment-10-e7cae.web.app/">  Live preview </a>
-                                </Card.Text>
+                                </div>
 
 
                             </Card.Body>
@@ -117,12 +117,12 @@ const Portfolio = () => {
                             <div className="card-img-top portfolio_img" style={{ backgroundImage: `url(${musion})` }} />
                             <Card.Body>
                                 <Card.Title> HIBISCUS </Card.Title>
-                                <Card.Text>
+                                <div>
                                     A inventory management website
-                                </Card.Text>
-                                <Card.Text>
+                                </div>
+                                <div>
                                     <a target='_blank' rel='noreferrer' className='btn btn-primary' href="https://suronjit797.github.io/musion/">  Live preview </a>
-                                </Card.Text>
+                                </div>
 
 
                             </Card.Body>

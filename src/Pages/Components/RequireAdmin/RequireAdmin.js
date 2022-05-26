@@ -1,13 +1,15 @@
 import axios from 'axios';
 import React, { useEffect, useState } from 'react';
 import { Spinner } from 'react-bootstrap';
-import { useLocation } from 'react-router-dom';
+import { Navigate, useLocation } from 'react-router-dom';
 
 const RequireAdmin = ({ children }) => {
 
     const [user,setUser] = useState({})
     const [loading, setLoading] = useState(true)
 
+    // location
+    let location = useLocation();
     useEffect(() => {
         axios.get('/jwt-verify', {
             headers: {
@@ -18,8 +20,6 @@ const RequireAdmin = ({ children }) => {
             setLoading(false)
         })
     }, [loading])
-    // location
-    let location = useLocation();
 
     // loading spinner
     if (loading) {
@@ -30,10 +30,13 @@ const RequireAdmin = ({ children }) => {
         )
     }
 
+    if(user.role !== 'admin'){
+        return <Navigate to='/' replace />
+    }
 
 
 
-    console.log(user.role);
+
     return children
 };
 

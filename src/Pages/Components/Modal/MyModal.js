@@ -31,7 +31,7 @@ const MyModal = (props) => {
                 <Modal.Body>
 
                     <Elements stripe={stripePromise}>
-                        <CheckoutForm onHide={props.onHide} paymentData={props.paymentData} />
+                        <CheckoutForm onHide={props.onHide} payment_data={props.payment_data} refetch={props.refetch} />
                     </Elements>
 
                 </Modal.Body>

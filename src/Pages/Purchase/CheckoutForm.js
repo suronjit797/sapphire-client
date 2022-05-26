@@ -5,8 +5,8 @@ import React, { useEffect, useState } from 'react';
 import Swal from 'sweetalert2'
 
 
-const CheckoutForm = ({ onHide, paymentData }) => {
-    const { orderPrice, userName, email, phone } = paymentData
+const CheckoutForm = ({ onHide, payment_data, refetch }) => {
+    const { orderPrice, userName, email, phone } = payment_data
     const stripe = useStripe();
     const elements = useElements();
     const [clientSecret, setClientSecret] = useState('')
@@ -14,14 +14,26 @@ const CheckoutForm = ({ onHide, paymentData }) => {
     useEffect(() => {
         if (orderPrice) {
             const token = localStorage.getItem('token')
-            axios.post('/payment-intent', { price: orderPrice || 0 }, {
+            axios.post('/payment-intent', { price: orderPrice || 1 }, {
                 headers: {
                     Authorization: `Bearer ${token}`
                 }
             })
                 .then(res => setClientSecret(res.data))
+                .catch(error => {
+                    if (error.message) {
+                        Swal.fire({
+                            icon: 'error',
+                            title: 'Oops',
+                            text: error.response.data.message
+                        })
+                    }
+
+                }
+
+                )
         }
-    }, [orderPrice])
+    }, [orderPrice, onHide])
 
 
     const handleSubmit = async (event) => {
@@ -36,7 +48,7 @@ const CheckoutForm = ({ onHide, paymentData }) => {
         if (card == null) {
             return;
         }
-        const {error } = await stripe.createPaymentMethod({
+        const { error } = await stripe.createPaymentMethod({
             type: 'card',
             card,
         });
@@ -48,17 +60,22 @@ const CheckoutForm = ({ onHide, paymentData }) => {
                 text: error.message,
             })
         } else {
-            Swal.fire({
-                icon: 'success',
-                title: 'Success',
-                text: 'Payment successfully',
-            })
-            onHide()
+            axios.put(`/order-pay/${payment_data._id}`, {})
+                .then(res => {
+                    refetch()
+                    Swal.fire({
+                        icon: 'success',
+                        title: 'Success',
+                        text: 'Payment successfully',
+                    })
+                    onHide()
+                })
+
         }
 
 
         // confimr card payment
-        
+
         const { paymentIntent, error: intentError } = await stripe.confirmCardPayment(
             clientSecret.clientSecret,
             {

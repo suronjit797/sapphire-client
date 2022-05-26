@@ -76,7 +76,7 @@ const ManageOrders = () => {
                             <Card className='h-100'>
                                 <Card.Body>
                                     <Card.Title className='fw-bold'> {order.productName || 'Undefine'} </Card.Title>
-                                    <Card.Text>
+                                    <div>
                                         <small> {order.delivered ?
                                             <small className="border border-2 d-inline-block p-1 px-2 mb-2 rounded-pill border-success  text-success">Delivered</small> :
                                             <small className="border border-2 d-inline-block p-1 px-2 mb-2 rounded-pill border-warning  text-warning">Pending</small>} </small>
@@ -86,7 +86,7 @@ const ManageOrders = () => {
                                         <div> <b className="text-capitalize"> orderQuantity: </b> {order.orderQuantity} </div>
                                         <div> <b className="text-capitalize"> orderPrice: </b> {order.orderPrice} </div>
                                         <div> <b className="text-capitalize"> address: </b> {order.address} </div>
-                                    </Card.Text>
+                                    </div>
                                 </Card.Body>
                                 <div className="d-flex">
                                     <button onClick={() => handleDelivered(order._id)} className="w-100 btn btn-primary mt-auto" disabled={order.delivered}> Delivery </button>

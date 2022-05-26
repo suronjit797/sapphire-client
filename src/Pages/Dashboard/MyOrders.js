@@ -8,7 +8,7 @@ import MyModal from '../Components/Modal/MyModal';
 
 
 const MyOrders = () => {
-    const { isLoading, error, data: myOrders } = useQuery('myOrders', () =>
+    const { isLoading, error, data: myOrders, refetch } = useQuery('myOrders', () =>
         axios.get('/user-order', {
             headers: {
                 Authorization: `Bearer ${localStorage.getItem('token')}`
@@ -68,10 +68,10 @@ const MyOrders = () => {
                             <Card className='h-100'>
                                 <Card.Body>
                                     <Card.Title className='fw-bold'> {order.productName || 'Undefine'} </Card.Title>
-                                    <div>
+                                    <div>Payment Status: 
                                         <small> {order.paid ?
                                             <small className="border border-2 d-inline-block p-1 px-2 mb-2 rounded-pill border-success  text-success">Paid</small> :
-                                            <small className="border border-2 d-inline-block p-1 px-2 mb-2 rounded-pill border-warning  text-warning">Pending</small>} </small>
+                                            <small className="border border-2 d-inline-block p-1 px-2 mb-2 rounded-pill border-warning  text-warning">Unpaid</small>} </small>
                                         <div> <b className="text-capitalize"> userName: </b> {order.userName ? order.userName : 'Undefine'} </div>
                                         <div> <b className="text-capitalize"> email: </b> {order.email} </div>
                                         <div> <b className="text-capitalize"> phone: </b> {order.phone} </div>
@@ -86,8 +86,9 @@ const MyOrders = () => {
                                 </div>
                             </Card>
                             <MyModal
-                                paymentData={paymentData}
+                                payment_data={paymentData}
                                 show={modalShow}
+                                refetch={refetch}
                                 onHide={() => setModalShow(false)}
                             />
                         </Col>
