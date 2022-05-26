@@ -21,6 +21,10 @@ const Purchase = () => {
     )
 
     useEffect(() => {
+        document.title = 'Purchase|| SAPPHIRE'
+    }, [])
+
+    useEffect(() => {
         if (error) {
             Swal.fire({
                 icon: 'error',

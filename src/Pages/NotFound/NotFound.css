@@ -1,0 +1,7 @@
+.notFound {
+    min-height: calc(100vh - 100px);
+    background-color: var(--bs-warning);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}

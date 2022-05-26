@@ -14,6 +14,10 @@ const ManageUsers = () => {
     const [loading, setLoading] = useState(true)
 
     useEffect(() => {
+        document.title = 'Mange users || SAPPHIRE'
+    }, [])
+
+    useEffect(() => {
         axios.get('/jwt-verify', {
             headers: {
                 Authorization: `Bearer ${localStorage.getItem('token')}`

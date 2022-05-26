@@ -26,6 +26,10 @@ const MyOrders = () => {
     const [modalShow, setModalShow] = useState(false);
     const [paymentData, setPaymentData] = useState({})
 
+    useEffect(() => {
+        document.title = 'My orders || SAPPHIRE'
+    }, [])
+
     const handlePayment = (id) => {
         axios.get(`/order/${id}`, { price: 10 })
             .then(res => setPaymentData(res.data))

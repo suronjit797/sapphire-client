@@ -19,6 +19,10 @@ const Profile = () => {
     const [company, setCompany] = useState('')
 
     useEffect(() => {
+        document.title = 'Profile || SAPPHIRE'
+    }, [])
+
+    useEffect(() => {
         const token = localStorage.getItem('token')
         axios.get('/jwt-verify', {
             headers: {

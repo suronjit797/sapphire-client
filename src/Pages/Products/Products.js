@@ -11,6 +11,10 @@ const Products = () => {
     const { isLoading, error, data: products } = useQuery('products', () =>
         axios.get('/products').then(res => res.data)
     )
+
+    useEffect(() => {
+        document.title = 'Products|| SAPPHIRE'
+    }, [])
     useEffect(() => {
         if (error) {
             Swal.fire({

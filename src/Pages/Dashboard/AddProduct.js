@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import Swal from 'sweetalert2'
 import { useForm } from "react-hook-form";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
@@ -10,6 +10,10 @@ import { useAuthState } from 'react-firebase-hooks/auth';
 
 
 const AddProduct = () => {
+
+    useEffect(() => {
+        document.title = 'Add product || SAPPHIRE'
+    }, [])
 
     // make data formate
     const dt = new Date()

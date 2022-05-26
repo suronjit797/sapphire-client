@@ -1,5 +1,5 @@
 import axios from 'axios';
-import React from 'react';
+import React, { useEffect } from 'react';
 import { Button, Table } from 'react-bootstrap';
 import { useQuery } from 'react-query';
 
@@ -7,6 +7,10 @@ const AddReview = () => {
     const { isLoading, error, data: review } = useQuery('review', () =>
         axios.get('/review?limit=20').then(res => res.data)
     )
+
+    useEffect(() => {
+        document.title = 'All Review || SAPPHIRE'
+    }, [])
     return (
         <div>
             <Table hover striped className='text-center'>

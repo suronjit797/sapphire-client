@@ -23,6 +23,7 @@ import Products from './Pages/Products/Products';
 import Purchase from './Pages/Purchase/Purchase';
 import ManageUsers from './Pages/Dashboard/ManageUsers';
 import RequireAdmin from './Pages/Components/RequireAdmin/RequireAdmin';
+import NotFound from './Pages/NotFound/NotFound';
 
 function App() {
   return (
@@ -46,6 +47,7 @@ function App() {
 
         <Route path='/login' element={<Login />} />
         <Route path='/register' element={<Register />} />
+        <Route path='*' element={<NotFound />} />
       </Routes>
       <Footer />
     </div>

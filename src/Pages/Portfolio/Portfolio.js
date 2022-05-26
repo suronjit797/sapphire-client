@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { Card, Col, ProgressBar, Row } from 'react-bootstrap';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faCloudArrowDown } from '@fortawesome/free-solid-svg-icons'
@@ -11,6 +11,10 @@ import musion from '../../Images/musion.png'
 import './Portfolio.css'
 
 const Portfolio = () => {
+
+    useEffect(() => {
+        document.title = 'Portfolio|| SAPPHIRE'
+    }, [])
 
     return (
         <div className='container portfolio'>

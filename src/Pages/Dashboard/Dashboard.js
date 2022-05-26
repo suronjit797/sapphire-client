@@ -5,8 +5,14 @@ import axios from 'axios';
 
 const Dashboard = () => {
 
+    
+
     const [user, setUser] = useState({})
     const [loading, setLoading] = useState(true)
+
+    useEffect(() => {
+        document.title = 'Dashboard || SAPPHIRE'
+    }, [])
 
     useEffect(() => {
         axios.get('/jwt-verify', {

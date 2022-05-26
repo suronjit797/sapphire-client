@@ -19,6 +19,11 @@ const Register = () => {
     let form = location?.state?.from?.pathname || "/";
 
 
+    useEffect(() => {
+        document.title = 'Register|| SAPPHIRE'
+    }, [])
+
+
     // firebase hooks
     const [
         createUserWithEmailAndPassword,

@@ -26,6 +26,9 @@ const Home = () => {
             })
         }
     }, [error, recent_error])
+    useEffect(() => {
+        document.title = 'Home || SAPPHIRE'
+    }, [])
 
 
     if (!Array.isArray(products)) {

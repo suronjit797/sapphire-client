@@ -26,6 +26,10 @@ const Login = () => {
         error,
     ] = useSignInWithEmailAndPassword(auth);
 
+    useEffect(() => {
+        document.title = 'Login || SAPPHIRE'
+    }, [])
+
     // if error
     useEffect(() => {
         if (error) {

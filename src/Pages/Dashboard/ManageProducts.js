@@ -12,6 +12,11 @@ const ManageProducts = () => {
         axios.get('/products').then(res => res.data)
     )
     useEffect(() => {
+        document.title = 'Manage products || SAPPHIRE'
+    }, [])
+
+
+    useEffect(() => {
         if (error) {
             Swal.fire({
                 icon: 'error',

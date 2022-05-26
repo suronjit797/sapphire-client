@@ -9,6 +9,10 @@ const ManageOrders = () => {
         axios.get('/orders').then(res => res.data)
     )
 
+    useEffect(() => {
+        document.title = 'Manage order || SAPPHIRE'
+    }, [])
+
 
     const handleRemove = id => {
         Swal.fire({

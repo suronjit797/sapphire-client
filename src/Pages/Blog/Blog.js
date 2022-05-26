@@ -1,6 +1,9 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 
 const Blog = () => {
+    useEffect(() => {
+        document.title = 'Blog || SAPPHIRE'
+    }, [])
     return (
         <div className='container my-5'>
             <h1 className="text-center text-primary"> Blogs </h1>
