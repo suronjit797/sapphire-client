@@ -6,6 +6,7 @@ import Swal from 'sweetalert2';
 import { Row, Spinner } from 'react-bootstrap';
 import ProductCard from '../Components/SocialSignIn/ProductCard/ProductCard';
 import HomeReview from './HomeReview';
+import HomeTrust from './HomeTrust';
 
 
 const Home = () => {
@@ -54,6 +55,8 @@ const Home = () => {
             </div>
 
             <HomeReview />
+
+            <HomeTrust />
 
 
 
