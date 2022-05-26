@@ -1,3 +1,8 @@
 .purchase_left .addProductInner{
     width: auto;
 }
+
+.review .review-item:not(:last-child){
+    border-bottom: 1px solid rgba(119, 119, 119, 0.541);
+    margin-bottom: 20px;
+}

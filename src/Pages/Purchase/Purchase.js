@@ -10,6 +10,7 @@ import auth from '../../firebase.init';
 import './Purchase.css';
 import PurchaseCard from './PurchaseCard';
 import PurchaseForm from './PurchaseForm';
+import PurchaseReview from './PurchaseReview';
 import ReviewForm from './ReviewForm';
 
 const Purchase = () => {
@@ -58,6 +59,11 @@ const Purchase = () => {
                     <div className='purchase_left'>
                         <PurchaseCard product={product} />
                         <ReviewForm productId={product._id} displayName={user.displayName} email={user.email} />
+
+                        <hr />
+                        <div className="mt-4">
+                            <PurchaseReview review={product.review} />
+                        </div>
                     </div>
                 </Col>
                 <Col lg={4}>

@@ -9,10 +9,11 @@ const ReviewForm = ({ productId, displayName, email }) => {
 
     const handleReview = event => {
         event.preventDefault()
+        console.log(productId);
 
         axios.post('/review', { userName: displayName, email, review })
             .then(res =>
-                axios.post(`/product-review/${productId}`, { userName: displayName, email, review })
+                axios.put(`/product-review/${productId}`, { userName: displayName, email, review })
                     .then(res => console.log(res.data))
             )
             .catch(error => console.dir(error.message))
