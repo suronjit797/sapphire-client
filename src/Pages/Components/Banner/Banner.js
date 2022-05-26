@@ -13,6 +13,7 @@ const Banner = () => {
                     className="d-block w-100 h-100"
                     src={banner}
                     alt="First slide"
+                    style={{minHeight: '100vh'}}
                 />
                 {/* <Carousel.Caption>
                     <h3>First slide label</h3>
@@ -24,6 +25,7 @@ const Banner = () => {
                     className="d-block w-100 h-100"
                     src={banner2}
                     alt="First slide"
+                    style={{minHeight: '100vh'}}
                 />
                 {/* <Carousel.Caption>
                     <h3>First slide label</h3>

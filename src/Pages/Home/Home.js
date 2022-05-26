@@ -5,6 +5,7 @@ import Banner from '../Components/Banner/Banner';
 import Swal from 'sweetalert2';
 import { Row, Spinner } from 'react-bootstrap';
 import ProductCard from '../Components/SocialSignIn/ProductCard/ProductCard';
+import HomeReview from './HomeReview';
 
 
 const Home = () => {
@@ -51,6 +52,11 @@ const Home = () => {
                     }
                 </Row>
             </div>
+
+            <HomeReview />
+
+
+
         </div>
     );
 };

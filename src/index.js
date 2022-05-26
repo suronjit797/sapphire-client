@@ -9,8 +9,8 @@ import { QueryClient, QueryClientProvider } from 'react-query'
 
 const queryClient = new QueryClient()
 
-// axios.defaults.baseURL = 'https://assignment-12-sp.herokuapp.com/'
-axios.defaults.baseURL = 'http://localhost:5000/'
+axios.defaults.baseURL = 'https://assignment-12-sp.herokuapp.com/'
+// axios.defaults.baseURL = 'http://localhost:5000/'
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(

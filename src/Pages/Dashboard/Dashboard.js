@@ -28,6 +28,7 @@ const Dashboard = () => {
                     {
                         user.role === 'admin' ? (
                             <>
+                                <NavLink to='/dashboard/'> My Profile </NavLink>
                                 <NavLink to='/dashboard/add-review'>All Review </NavLink>
                                 <NavLink to='/dashboard/manage-all-orders'> Manage All Orders </NavLink>
                                 <NavLink to='/dashboard/manage-users'> Manage Users </NavLink>

@@ -1,5 +1,6 @@
 import axios from 'axios';
 import React, { useState } from 'react';
+import Swal from 'sweetalert2';
 
 const ReviewForm = ({ productId, displayName, email }) => {
 
@@ -14,7 +15,16 @@ const ReviewForm = ({ productId, displayName, email }) => {
         axios.post('/review', { userName: displayName, email, review })
             .then(res =>
                 axios.put(`/product-review/${productId}`, { userName: displayName, email, review })
-                    .then(res => console.log(res.data))
+                    .then(res => {
+                        if(res.data){
+                            setReview('')
+                            Swal.fire({
+                                icon: 'success',
+                                title: 'Review...',
+                                text: 'Your review added successfully',
+                            })
+                        }
+                    })
             )
             .catch(error => console.dir(error.message))
 
