@@ -14,15 +14,18 @@ const Home = () => {
     const { isLoading, error, data: products } = useQuery('products', () =>
         axios.get('/products?limit=8').then(res => res.data)
     )
+    const { isLoading: recent_loading, error: recent_error, data: recent_products } = useQuery('recent-products', () =>
+        axios.get('/recent-products?limit=4').then(res => res.data)
+    )
     useEffect(() => {
-        if (error) {
+        if (error || recent_error) {
             Swal.fire({
                 icon: 'error',
                 title: 'Oops...',
-                text: error.message,
+                text: error?.message || recent_error?.message,
             })
         }
-    }, [error])
+    }, [error, recent_error])
 
 
     if (!Array.isArray(products)) {
@@ -33,7 +36,7 @@ const Home = () => {
         )
     }
 
-    if (isLoading) {
+    if (isLoading || recent_loading) {
         return (
             <div className='center'>
                 <Spinner animation="border" variant="primary" />
@@ -53,10 +56,18 @@ const Home = () => {
                     }
                 </Row>
             </div>
-
-            <HomeReview />
-
             <HomeTrust />
+            <div className='container my-5'>
+                <h2 className="text-center mb-5"> Recent <span className="text-primary"> Products </span> </h2>
+                <Row xs={1} sm={2} md={3} lg={4} className="g-5 align-items-stretch ">
+                    {
+                        recent_products?.map((product, index) => (
+                            <ProductCard key={product._id} product={product} index={index} />
+                        ))
+                    }
+                </Row>
+            </div>
+            <HomeReview />
 
 
 
