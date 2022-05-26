@@ -48,6 +48,7 @@ const Home = () => {
         <div>
             <Banner />
             <div className='container my-5'>
+                <h2 className="text-center mb-5 fw-bold"> Our <span className="text-primary"> Products </span> </h2>
                 <Row xs={1} sm={2} md={3} lg={4} className="g-5 align-items-stretch ">
                     {
                         products?.map((product, index) => (
@@ -58,7 +59,7 @@ const Home = () => {
             </div>
             <HomeTrust />
             <div className='container my-5'>
-                <h2 className="text-center mb-5"> Recent <span className="text-primary"> Products </span> </h2>
+                <h2 className="text-center mb-5 fw-bold"> Recent <span className="text-primary"> Products </span> </h2>
                 <Row xs={1} sm={2} md={3} lg={4} className="g-5 align-items-stretch ">
                     {
                         recent_products?.map((product, index) => (

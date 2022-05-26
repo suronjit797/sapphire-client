@@ -1,6 +1,6 @@
 import React from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faArrowsRotate, faEarthAsia, faFlag, faGift, faHeadset, faHeart, faListCheck, faNewspaper, faRocket, faSackDollar, faUsers, faUsersLine } from '@fortawesome/free-solid-svg-icons';
+import { faArrowsRotate, faHeadset, faRocket, faSackDollar } from '@fortawesome/free-solid-svg-icons';
 
 const HomeTrust = () => {
     return (

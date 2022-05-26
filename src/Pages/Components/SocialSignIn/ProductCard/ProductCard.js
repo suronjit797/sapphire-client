@@ -1,7 +1,5 @@
 import React from 'react';
 import { Card, Col, Spinner } from 'react-bootstrap';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faEye, faLink } from '@fortawesome/free-solid-svg-icons'
 import { Link } from 'react-router-dom'
 
 import './ProductCard.css'
