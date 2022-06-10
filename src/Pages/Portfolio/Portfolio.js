@@ -35,7 +35,7 @@ const Portfolio = () => {
                 <h1 className="text-center fw-bold my-5">
                     About <span className="text-primary"> Me </span>
                 </h1>
-                <Row classNam='align-items-center'>
+                <Row className='align-items-center'>
                     <Col lg={6} >
                         <h3> PERSONAL INFORMATION </h3>
                         <Row>

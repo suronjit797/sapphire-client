@@ -2,7 +2,7 @@ import axios from 'axios';
 import React, { useState } from 'react';
 import Swal from 'sweetalert2';
 
-const ReviewForm = ({ productId, displayName, email }) => {
+const ReviewForm = ({ productId, displayName, email, refetch }) => {
 
 
     const [review, setReview] = useState('')
@@ -18,6 +18,7 @@ const ReviewForm = ({ productId, displayName, email }) => {
                     .then(res => {
                         if(res.data){
                             setReview('')
+                            refetch()
                             Swal.fire({
                                 icon: 'success',
                                 title: 'Review...',

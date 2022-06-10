@@ -35,7 +35,8 @@ const PurchaseForm = ({ product, refetch }) => {
             phone,
             address,
             orderQuantity: parseInt(orderQuantity),
-            orderPrice
+            orderPrice,
+            productId: _id
         }
 
 
@@ -132,7 +133,7 @@ const PurchaseForm = ({ product, refetch }) => {
                 </div>
 
 
-                <button className="btn btn-primary"> Payment </button>
+                <button className="btn btn-primary"> Proceed to checkout </button>
 
 
             </form>

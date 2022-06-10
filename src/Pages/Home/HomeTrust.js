@@ -7,7 +7,7 @@ const HomeTrust = () => {
         <div className="">
             <div className='container py-4'>
                 <div className="text-center mb-5">
-                    <h1 className="fw-bold"> Our loyalty  </h1>
+                    <h2 className="fw-bold"> Our <span className="text-primary">  loyalty  </span> </h2>
                     <p className="fw-bold"> Try to understand our service, your expectation our product</p>
 
                 </div>

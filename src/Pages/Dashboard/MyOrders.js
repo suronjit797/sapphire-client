@@ -33,11 +33,20 @@ const MyOrders = () => {
     const handlePayment = (id) => {
         axios.get(`/order/${id}`, { price: 10 })
             .then(res => setPaymentData(res.data))
-        console.log(paymentData);
         setModalShow(true)
     }
     const handleRemove = id => {
-
+        axios.delete(`/order/${id}`)
+            .then(res => {
+                const { productId, orderQuantity } = res.data.product
+                axios.get(`/product/${productId}`)
+                    .then(res => {
+                        const { quantity: oldQuantity } = res.data
+                        const quantity = parseInt(orderQuantity) + parseInt(oldQuantity)
+                        axios.put(`/product/${productId}`, { quantity })
+                            .then(res => res.data ? refetch() : '')
+                    })
+            })
     }
 
 
@@ -72,7 +81,7 @@ const MyOrders = () => {
                             <Card className='h-100'>
                                 <Card.Body>
                                     <Card.Title className='fw-bold'> {order.productName || 'Undefine'} </Card.Title>
-                                    <div>Payment Status: 
+                                    <div>Payment Status:
                                         <small> {order.paid ?
                                             <small className="border border-2 d-inline-block p-1 px-2 mb-2 rounded-pill border-success  text-success">Paid</small> :
                                             <small className="border border-2 d-inline-block p-1 px-2 mb-2 rounded-pill border-warning  text-warning">Unpaid</small>} </small>

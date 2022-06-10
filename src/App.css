@@ -72,3 +72,7 @@ tr{
     width: 100%;
     background-color: var(--bs-danger);
 }
+
+.bg_blue{
+    background-color: #5352ed;
+}

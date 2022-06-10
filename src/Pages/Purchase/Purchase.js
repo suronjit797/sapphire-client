@@ -1,6 +1,6 @@
 import axios from 'axios';
 import { FirebaseError } from 'firebase/app';
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Col, Row, Spinner } from 'react-bootstrap';
 import { useAuthState } from 'react-firebase-hooks/auth';
 import { useQuery } from 'react-query';
@@ -19,6 +19,18 @@ const Purchase = () => {
     const { isLoading, error, data: product, refetch } = useQuery(['products', id], () =>
         axios.get(`/product/${id}`).then(res => res.data)
     )
+
+    const [userInfo, setUserInfo] = useState({})
+    useEffect(() => {
+        axios.get('/jwt-verify', {
+            headers: {
+                Authorization: `Bearer ${localStorage.getItem('token')}`
+            }
+        }).then(res => {
+            setUserInfo(res.data)
+            // setLoading(false)
+        })
+    }, [loading])
 
     useEffect(() => {
         document.title = 'Purchase|| SAPPHIRE'
@@ -41,7 +53,6 @@ const Purchase = () => {
     }, [userError])
 
 
-
     if (isLoading || loading) {
         return (
             <div className='center'>
@@ -59,10 +70,12 @@ const Purchase = () => {
                 <p>{user.email ? user.email : <p className="text-danger mb-0">No Email found</p>}</p>
             </div>
             <Row>
-                <Col lg={8}>
+                <Col lg={userInfo.role === 'admin' ? 12 : 8}>
                     <div className='purchase_left'>
                         <PurchaseCard product={product} />
-                        <ReviewForm productId={product._id} displayName={user.displayName} email={user.email} />
+                        <div className={userInfo.role === 'admin' ? 'd-none' : 'mt-4'} >
+                            <ReviewForm productId={product._id} displayName={user.displayName} email={user.email} refetch={refetch} />
+                        </div>
 
                         <hr />
                         <div className="mt-4">
@@ -70,7 +83,7 @@ const Purchase = () => {
                         </div>
                     </div>
                 </Col>
-                <Col lg={4}>
+                <Col lg={4} className={userInfo.role === 'admin' ? 'd-none' : ''}>
                     <div className='purchase_left'>
                         <PurchaseForm product={product} refetch={refetch} />
                     </div>

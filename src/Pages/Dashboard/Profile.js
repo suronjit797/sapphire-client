@@ -149,11 +149,6 @@ const Profile = () => {
                     <button className="btn btn-primary"> Update profile </button>
                 </form>
             </div>
-
-
-
-
-
         </div>
     );
 };

@@ -29,7 +29,7 @@ const Dashboard = () => {
     return (
         <div>
             <div className='dashboard'>
-                <div className="dashboard-left bg-dark">
+                <div className="dashboard-left bg_blue">
 
                     {
                         user.role === 'admin' ? (
